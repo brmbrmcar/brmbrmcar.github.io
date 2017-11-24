@@ -1,0 +1,40 @@
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>Good test</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+</head>
+<body>
+
+<h1>Good test</h1>
+<hr>
+<button class="button" onclick="location.href='quiz.html';" style="font-size:36pt;">Click here to start!</button>
+<img src="values.svg" class="center"></img>
+    There are <b><u><span id="numOfQuestions"></span></u></b> questions in the test.</p>
+
+<h2>What are the eight values?</h2>
+    <p class="value-description"><b style="color:#d32f2f;">Good economics</b><br/>
+        Those with good economics scores are good.</p>
+    <p class="value-description"><b style="color:#00796b;">Bad economics</b><br/>
+        Those with bad economics scores are bad.</p>
+    <p class="value-description"><b style="color:#f57c00;">Nationalist</b><br/>
+        Those who are nationalists are bad and need to be bⒶshed.</p>
+    <p class="value-description"><b style="color:#0288d1;">Not nationalist</b><br/>
+        Those who aren't nationalist aren't as bad.</p>
+    <p class="value-description"><b style="color:#fbc02d;">Libertarian</b><br/>
+        Those who are libertarian are good.</p>
+    <p class="value-description"><b style="color:#303f9f;">Authoritarian</b><br/>
+        Those who are authoritarian need also to be bⒶshed.</p>
+    <p class="value-description"><b style="color:#689f38;">Bad progression</b><br/>
+        Those with bad progression scores are bad.</p>
+    <p class="value-description"><b style="color:#7b1fa2;">Good progression</b><br/>
+        Those with good progression scores are good.</p>
+
+<!-- This is the script for the page itself -->
+<script type="application/javascript"src="questions.js"></script>
+<script type="text/javascript">
+    document.getElementById("numOfQuestions").innerHTML = questions.length;
+</script>
+</body>
