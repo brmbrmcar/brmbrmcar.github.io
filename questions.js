@@ -252,7 +252,7 @@ questions = [
         }
     },
     {
-        "question": "People should be able to migrate wherever they want without resctriction.",
+        "question": "People should be able to migrate wherever they want without restriction.",
         "effect": {
             "econ": 0,
             "dipl": 40,
