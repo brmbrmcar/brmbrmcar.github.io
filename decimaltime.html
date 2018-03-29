@@ -4,7 +4,7 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span> </span><font size = "5">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds</h1>
-<h2>There are 10 months in a year, 100 days in a month, 10 hours in a day, 100 minutes in an hour and 100 seconds in a minute.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
+<h2>There are 100 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour and 100 seconds in a minute.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
 
 <script>
 function pad(n, width, z) {
@@ -13,19 +13,20 @@ function pad(n, width, z) {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 function updateClock() {
+date = new Date()
+ms = date.getMilliseconds()
 seconds = (Date.parse(Date())/1000) - 1489276800
 document.getElementById("demo").innerHTML = pad(Math.floor(seconds / 86400000),4)
 year = Math.floor(seconds / 86400000)*86400000
-document.getElementById("demo2").innerHTML = Math.floor((seconds - year) / 8640000)
-month = Math.floor((seconds - year) / 8640000)*8640000
+document.getElementById("demo2").innerHTML = Math.floor((seconds - year) / 864000)
+month = Math.floor((seconds - year) / 864000)*864000
 document.getElementById("demo3").innerHTML = pad(Math.floor((seconds - year - month) / 86400),2)
 day = Math.floor((seconds - year - month) / 86400)*86400
 document.getElementById("demo4").innerHTML = Math.floor((seconds - year - month - day) / 8640)
 hour = Math.floor((seconds - year - month - day) / 8640)*8640
 document.getElementById("demo5").innerHTML = pad(Math.floor((seconds - year - month - day - hour) / 86.4),2)
 minute = Math.floor((seconds - year - month - day - hour) / 86.4)*86.4
-document.getElementById("demo6").innerHTML = pad(Math.floor((seconds - year - month - day - hour - minute) / 0.864),2)
-second = Math.floor((seconds - year - month - day - hour - minute) / 0.864)*0.864
+document.getElementById("demo6").innerHTML = pad(Math.floor(Math.floor((seconds - year - month - day - hour - minute) / 0.864)+(ms / 1000 / 0.864)),2)
 weekdayc = Math.floor((seconds) / 86400)
 if (weekdayc.toString().slice(-1) == 0){
 document.getElementById("weekday").innerHTML = "Startday"
@@ -52,10 +53,10 @@ if (weekdayc.toString().slice(-1) == 7){
 document.getElementById("weekday").innerHTML = "Memesday"
 }
 if (weekdayc.toString().slice(-1) == 8){
-document.getElementById("weekday").innerHTML = "Guday"
+document.getElementById("weekday").innerHTML = "Happyday"
 }
 if (weekdayc.toString().slice(-1) == 9){
-document.getElementById("weekday").innerHTML = "Baday"
+document.getElementById("weekday").innerHTML = "Loveday"
 }
 }
 window.setInterval("updateClock()", 1);
