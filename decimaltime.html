@@ -4,7 +4,7 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span> </span><font size = "5">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds</h1>
-<h2>There are 100 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour and 100 seconds in a minute.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour and 100 seconds in a minute.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
 
 <script>
 function pad(n, width, z) {
@@ -16,9 +16,9 @@ function updateClock() {
 date = new Date()
 ms = date.getMilliseconds()
 seconds = (Date.parse(Date())/1000) - 1489276800
-document.getElementById("demo").innerHTML = pad(Math.floor(seconds / 86400000),4)
-year = Math.floor(seconds / 86400000)*86400000
-document.getElementById("demo2").innerHTML = pad(Math.floor((seconds - year) / 864000),2)
+document.getElementById("demo").innerHTML = pad(Math.floor(seconds / 8640000),4)
+year = Math.floor(seconds / 8640000)*8640000
+document.getElementById("demo2").innerHTML = Math.floor((seconds - year) / 864000)
 month = Math.floor((seconds - year) / 864000)*864000
 document.getElementById("demo3").innerHTML = Math.floor((seconds - year - month) / 86400)
 day = Math.floor((seconds - year - month) / 86400)*86400
