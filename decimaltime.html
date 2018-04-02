@@ -2,9 +2,9 @@
 <html>
 <body>
 
-<span style="font-size: 2.75vw; color: #00FF00;"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span> </span><font size = "5">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
-<h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds</h1>
-<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour and 100 seconds in a minute.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
+<span style="font-size: 2.75vw; color: #00FF00;"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span>:<span id="demo7"></span> </span><font style="font-size:1vw">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
+<h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds:Milliseconds</h1>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3>
 
 <script>
 function pad(n, width, z) {
@@ -26,7 +26,9 @@ document.getElementById("demo4").innerHTML = Math.floor((seconds - year - month 
 hour = Math.floor((seconds - year - month - day) / 8640)*8640
 document.getElementById("demo5").innerHTML = pad(Math.floor((seconds - year - month - day - hour) / 86.4),2)
 minute = Math.floor((seconds - year - month - day - hour) / 86.4)*86.4
-document.getElementById("demo6").innerHTML = pad(Math.floor(Math.floor((seconds - year - month - day - hour - minute) / 0.864)+(ms / 1000 / 0.864)),2)
+document.getElementById("demo6").innerHTML = pad(Math.floor(Math.floor(Math.floor((Date.now()-1489276800)/0.864)-(Math.floor((Date.now()-1489276800)/100000/0.864)*100000))/1000),2)
+second = Math.floor(Math.floor(Math.floor((Date.now()-1489276800)/0.864)-(Math.floor((Date.now()-1489276800)/100000/0.864)*100000))/1000)
+document.getElementById("demo7").innerHTML = pad(Math.abs(second*1000-Math.floor(Math.floor(Math.floor((Date.now()-1489276800)/0.864)-(Math.floor((Date.now()-1489276800)/100000/0.864)*100000)))),3)
 weekdayc = Math.floor((seconds) / 86400)
 if (weekdayc.toString().slice(-1) == 0){
 document.getElementById("weekday").innerHTML = "Startday"
