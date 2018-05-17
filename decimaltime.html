@@ -4,7 +4,7 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;" id="gtext"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span>:<span id="demo7"></span> </span><span id="btext"><font style="font-size:1vw">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds:Milliseconds</h1>
-<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3></span><br/><br/><span><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> <a href="javascript:eraseCookie()">Delete dark theme cookie</a>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility: hidden;" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 
 <script>
 function pad(n, width, z) {
@@ -109,6 +109,8 @@ setCookie('dark1','true1',999);
 var user = getCookie("dark1");
 if (user != "") {
 window.open("javascript:dark()","_self")
+document.getElementById("hidecookie").innerHTML = ""
+document.getElementById("delete").style.visibility = "visible"
 }
 
 </script>
