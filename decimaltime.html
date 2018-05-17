@@ -4,7 +4,7 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;" id="gtext"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span>:<span id="demo7"></span> </span><span id="btext"><font style="font-size:1vw">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds:Milliseconds</h1>
-<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3></span><br/><br/><span><a id="switch" href="javascript:dark()">Go dark</a>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3></span><br/><br/><span><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> <a href="javascript:eraseCookie()">Delete dark theme cookie</a>
 
 <script>
 function pad(n, width, z) {
@@ -76,6 +76,41 @@ document.getElementById("switch").href = "javascript:location.reload()"
 document.getElementById("switch").innerHTML = "Go light"
 document.getElementById("switch").style.color = "white"
 }
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+function eraseCookie() {   
+setCookie('dark1','true1',-1);
+}
+function rememberdark(){
+setCookie('dark1','true1',999);
+}
+
+var user = getCookie("dark1");
+if (user != "") {
+window.open("javascript:dark()","_self")
+}
+
 </script>
 <br/><br/><span id="btext2"><font size ="1">Let it be k-nown that I was not fully responsible for the creation of these names.</font></span>
 </body>
