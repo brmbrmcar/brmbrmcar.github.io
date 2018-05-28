@@ -4,7 +4,7 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;" id="gtext"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span>:<span id="demo7"></span> </span><span id="btext"><font style="font-size:1vw">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds:Milliseconds</h1>
-<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3><br/><br/>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3><br/><br/>Conversions: (WARNING: changing theme may reset any values)<br/>
 Imperial seconds to decimal:  <input id="inputseci" type="number" oninput="sec2dec(this.value)" onchange="sec2dec(this.value)">
 <span id="outputsecd"></span>
 
@@ -166,9 +166,11 @@ function getCookie(cname) {
 }
 function eraseCookie() {   
 setCookie('dark1','true1',-1);
+location.reload()
 }
 function rememberdark(){
 setCookie('dark1','true1',999);
+location.reload()
 }
 
 var user = getCookie("dark1");
