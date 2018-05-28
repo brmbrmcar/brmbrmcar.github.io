@@ -4,7 +4,72 @@
 
 <span style="font-size: 2.75vw; color: #00FF00;" id="gtext"><span id="weekday"></span>, <span id="demo"></span>/<span id="demo2">/</span>/<span id="demo3"></span> <span id="demo4"></span>:<span id="demo5"></span>:<span id="demo6"></span>:<span id="demo7"></span> </span><span id="btext"><font style="font-size:1vw">Note: Time may vary in accuracy due to dependence on the computer's local clock.</font><br/>
 <h1>Format: Weekday, Years/Month/Day Hours:Minutes:Seconds:Milliseconds</h1>
-<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility: hidden;" href="javascript:eraseCookie()">Delete dark theme cookie</a>
+<h2>There are 10 months in a year, 10 days in a month, 10 hours in a day, 100 minutes in an hour, 100 seconds in a minute and 1000 milliseconds in a second.</h2><h3>A day is the approximate amount of time it takes for the Earth to complete a full rotation in respect to the Sun.</h3><br/><br/>
+Imperial seconds to decimal:  <input id="inputseci" type="number" oninput="sec2dec(this.value)" onchange="sec2dec(this.value)">
+<span id="outputsecd"></span>
+
+<script>
+function sec2dec(valNum) {
+  document.getElementById("outputsecd").innerHTML=Math.round((valNum/0.864)*100)/100;
+}
+</script><br/>
+Decimal seconds to imperial:  <input id="inputsecd" type="number" oninput="sec2imp(this.value)" onchange="sec2imp(this.value)">
+<span id="outputseci"></span>
+
+<script>
+function sec2imp(valNum) {
+  document.getElementById("outputseci").innerHTML=Math.round((valNum*0.864)*100)/100;
+}
+</script><br/>
+Imperial minutes to decimal:  <input id="inputmin" type="number" oninput="min2dec(this.value)" onchange="min2dec(this.value)">
+<span id="outputmind"></span>
+
+<script>
+function min2dec(valNum) {
+  document.getElementById("outputmind").innerHTML=Math.round((valNum/1.44)*100)/100;
+}
+</script><br/>
+Decimal minutes to imperial:  <input id="inputmind" type="number" oninput="min2imp(this.value)" onchange="min2imp(this.value)">
+<span id="outputmini"></span>
+
+<script>
+function min2imp(valNum) {
+  document.getElementById("outputmini").innerHTML=Math.round((valNum*1.44)*100)/100;
+}
+</script><br/>
+Imperial hours to decimal:  <input id="inputhoui" type="number" oninput="hou2dec(this.value)" onchange="hou2dec(this.value)">
+<span id="outputhoud"></span>
+
+<script>
+function hou2dec(valNum) {
+  document.getElementById("outputhoud").innerHTML=Math.round((valNum/2.4)*100)/100;
+}
+</script><br/>
+Decimal hours to imperial:  <input id="inputhoud" type="number" oninput="hou2imp(this.value)" onchange="hou2imp(this.value)">
+<span id="outputhoui"></span>
+
+<script>
+function hou2imp(valNum) {
+  document.getElementById("outputhoui").innerHTML=Math.round((valNum*2.4)*100)/100;
+}
+</script><br/>
+Earth years to decimal:  <input id="inputyeai" type="number" oninput="yea2dec(this.value)" onchange="yea2dec(this.value)">
+<span id="outputyead"></span>
+
+<script>
+function yea2dec(valNum) {
+  document.getElementById("outputyead").innerHTML=Math.round((valNum*3.652425)*100)/100;
+}
+</script><br/>
+Decimal years to Earth:  <input id="inputyead" type="number" oninput="yea2imp(this.value)" onchange="yea2imp(this.value)">
+<span id="outputyeai"></span>
+
+<script>
+function yea2imp(valNum) {
+  document.getElementById("outputyeai").innerHTML=Math.round((valNum/3.652425)*100)/100;
+}
+</script><br/>
+</span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility: hidden;" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 
 <script>
 function pad(n, width, z) {
@@ -114,6 +179,8 @@ document.getElementById("delete").style.visibility = "visible"
 }
 
 </script>
+<br/>
+
 <br/><br/><span id="btext2"><font size ="1">Let it be k-nown that I was not fully responsible for the creation of these names.</font></span>
 </body>
 </html>
