@@ -69,8 +69,45 @@ Decimal years to Earth:  <input id="inputyead" type="number" oninput="yea2imp(th
 function yea2imp(valNum) {
   document.getElementById("outputyeai").innerHTML=Math.round((valNum/3.652425)*100)/100;
 }
-</script><br/>
-</span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility: hidden;" href="javascript:eraseCookie()">Delete dark theme cookie</a>
+</script><br/><br/>
+<a href="javascript:showqa()" id="askq">Show questions and answers</a>
+<br/><br/><br/><span id="qa" style="display: none;">Why aren't years based on actual Earth years?
+</br></br>
+<blockquote>I tried playing with this a bit, and people did not like the results as it meant the system was not fully decimal. I deemed days to be of greater importance.</blockquote>
+</br>
+Why do the units share the same name as imperial units?
+</br></br>
+<blockquote>Look at the day names. I'm not that inventive.</blockquote>
+</br>
+How many weeks are in a month?
+</br></br>
+<blockquote>1. They're the same.</blockquote>
+</br>
+Why is there no converter for weeks/months?
+</br></br>
+<blockquote>People don't tend to meaure time by measure of imperial weeks, and imperial months change so much and the change is based on literally nothing.</blockquote>
+</br>
+What are the weekday names?
+</br></br>
+<blockquote>0 - Startday, 1 - 0yday, 2 - Hugday, 3 - Freeday, 4 - Sansday, 5 - Anarchyday, 6 - Atheismday, 7 - Memesday, 8 - Happyday, 9 - Loveday.</blockquote>
+</br>
+Why is it not just a number of days?
+</br></br>
+<blockquote>This just would not be practical, because it would be very hard to read and it'd be harder to say verbally in an informal manner.</blockquote>
+</br>
+Are there different timezones?
+</br></br>
+<blockquote>No. 0:00:00:000 (decimal midnight) is the same as UTC midnight.</blockquote>
+</br>
+Can I copy the system/code/anything from this page?
+</br></br>
+<blockquote>Yes! You can use everything here without restriction. I don't know why you'd want the code though, it is a complete mess. If you could sync this with an atomic clock though, that's be amazing. If you want to create decent names for things or modify anything please do so.</blockquote>
+</br>
+Do you still love me when it's not Loveday and will you hug me when it's not Hugday?
+</br></br>
+<blockquote>Of course, I love you infinitely all days and I'll hug you any time, my friend.</blockquote></span>
+
+</span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 
 <script>
 function pad(n, width, z) {
@@ -180,9 +217,12 @@ window.open("javascript:dark()","_self")
 document.getElementById("hidecookie").innerHTML = ""
 document.getElementById("delete").style.visibility = "visible"
 }
-
+function showqa()
+{
+document.getElementById("qa").style.display = "initial"
+document.getElementById("askq").innerHTML = ""
+}
 </script>
-<br/>
 
 <br/><br/><span id="btext2"><font size ="1">Let it be k-nown that I was not fully responsible for the creation of these names.</font></span>
 </body>
