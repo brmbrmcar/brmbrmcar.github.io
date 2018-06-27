@@ -1,0 +1,77 @@
+<html><head> <meta charset="UTF-16"> </head><body>
+This calculator will work out the most dangerous possible input current/potential difference for a given amount of power. This is useful for answering the question of the most dangerous current and potential difference combination for a given situation. Potential difference is not what causes danger; it is current. However, in order to get through the very high resistance of a body of a creature, a high enough potential difference is needed. This is what makes these questions so interesting, however answers are generally extremely poor. This badly designed calculator has the aim of solving this.
+<br/><br/>
+For any of the values, do not enter 0 or anything that is not a number as I might just hit you with one of these dangerous combinations if you do as much. I also apologise that the units are imperial; I have yet to produce decimal alternatives.
+<br/><br/>
+Resistance is measured in ohms. As a reference, the human body can have a resistance of anywhere from 100Ω on the tongue up to 100000Ω on dry skin. The higher the value, the quicker the calculation is likely to be.
+<br/><br/>
+Power is measured in watts (joules per imperial second). The higher the value, the longer the calculation is likely to take.
+<br/><br/>
+The precision is how many values that will be checked. 10000000 is the recommended value, and going below 1000000 is not recommended. The greater the precision, the longer the calculation is likely to take.
+<br/><br/>
+The significant figures are the amount of significant figures that the input potential difference and current and the output current, power and potential difference will be displayed to. Going above 20 may cause issues. This should not impact speed of the calculation.
+<br/><br/>
+To calculate a new dangerous level set, click <a href="javascript:location.reload()">here</a>. I need to fix this, as well as a load of other things.
+<br/><br/>
+As a general note, the watts can be used as a test if anything has not calculated correctly, as then it is often above the input. In most cases, the power will be similar input and output because there is just enough potential difference to push the current through.
+<br/><br/><br/>
+
+Resistance (Ohms): <input type="number" id="resin" value="289" onclick="check()" onchange="check()">
+Power (Watts): <input type="number" id="powin" value="4913" onclick="check()" onchange="check()">
+Precision: <input type="number" id="prein" value="10000000" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin" value="5"> <button onclick="calcdanger()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
+<span id="current"></span><span id="pot"></span><span id="output"></span><span id="output2"></span><span id="output3"></span><span id="count"></span>
+<script>
+accuracy = parseFloat(document.getElementById("prein").value);
+current2 = 1
+res = parseFloat(document.getElementById("resin").value);
+power = parseFloat(document.getElementById("powin").value);
+prec = parseFloat(document.getElementById("sigin").value);
+function check() {
+accuracy = parseFloat(document.getElementById("prein").value);
+res = parseFloat(document.getElementById("resin").value);
+power = parseFloat(document.getElementById("powin").value);
+prec = parseFloat(document.getElementById("sigin").value);
+}
+current = power/accuracy
+high = 0
+high2 = 0
+high1 = 0
+high3 = 0
+high4 = 0
+now = 0
+function calcdanger() {
+	var lop = setInterval( function() { 
+	pot = power/current
+	current2 = pot/res
+	if (current>=current2){
+	now = current2
+	}
+	if (current<current2){
+	now = current
+	}
+	if (now>high){
+	high = now
+	high1 = pot
+	high2 = current
+        high3 = Math.pow(current,2)*res
+        high4 = high3/current
+	}
+	current = current+(power/accuracy)
+	document.getElementById("count").innerHTML=Math.floor(((current-(power/accuracy))/current2)*10000)/100 + "% calculated"
+	if (current2<=current-(power/accuracy)){
+	dangerout()
+	clearInterval(lop)
+	}
+	}, 1);
+}
+function dangerout(){
+document.getElementById("current").innerHTML=high2.toPrecision(prec) + " amperes and "
+document.getElementById("pot").innerHTML=high1.toPrecision(prec) + " volts is the most dangerous possible input. This results in an output of "
+document.getElementById("output").innerHTML=high.toPrecision(prec) + " amperes, "
+document.getElementById("output2").innerHTML=high3.toPrecision(prec) + " watts and "
+document.getElementById("output3").innerHTML=high4.toPrecision(prec) + " volts. "
+document.getElementById("count").innerHTML=""
+}
+</script>
+</body></html>
