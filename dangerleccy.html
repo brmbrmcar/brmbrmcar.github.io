@@ -19,7 +19,7 @@ As a general note, the watts can be used as a test if anything has not calculate
 Resistance (Ohms): <input type="number" id="resin" value="289" onclick="check()" onchange="check()">
 Power (Watts): <input type="number" id="powin" value="4913" onclick="check()" onchange="check()">
 Precision: <input type="number" id="prein" value="10000000" onclick="check()" onchange="check()">
-Significant figures: <input type="number" id="sigin" value="5"> <button onclick="calcdanger()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
+Significant figures: <input type="number" id="sigin" value="5" onclick="check()" onchange="check()"> <button onclick="calcdanger()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
 <span id="current"></span><span id="pot"></span><span id="output"></span><span id="output2"></span><span id="output3"></span><span id="count"></span>
 <script>
 accuracy = parseFloat(document.getElementById("prein").value);
