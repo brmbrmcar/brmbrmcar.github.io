@@ -54,8 +54,8 @@ function calcdanger() {
 	high = now
 	high1 = pot
 	high2 = current
-        high3 = Math.pow(current,2)*res
-        high4 = high3/current
+        high3 = Math.pow(now,2)*res
+        high4 = high3/now
 	}
 	current = current+(power/accuracy)
 	document.getElementById("count").innerHTML=Math.floor(((current-(power/accuracy))/current2)*10000)/100 + "% calculated"
