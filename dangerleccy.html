@@ -26,7 +26,7 @@ This equally badly designed calculator will work out the maximum resistance for 
 Current (Amperes): <input type="number" id="curin17" value="289" onclick="check()" onchange="check()">
 Potential difference (Volts): <input type="number" id="potin17" value="4913" onclick="check()" onchange="check()">
 Significant figures: <input type="number" id="sigin17" value="5" onclick="check()" onchange="check()"> <button onclick="calcmaxres()">CALCULATE MAXIMUM RESISTANCE FOR THE CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
-<span id="resout17"></span>
+<span id="resout17"></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 <script>
 current2 = 1
 cur17 = parseFloat(document.getElementById("curin17").value);
@@ -74,6 +74,57 @@ document.getElementById("count").innerHTML=""
 function calcmaxres(){
 out17 = (pot17*cur17)/Math.pow(cur17,2)
 document.getElementById("resout17").innerHTML=out17.toPrecision(prec17) + " ohms is the maximum resistance."
+}
+
+function darktheme()
+{
+document.body.style.backgroundColor = "black";
+document.body.style.color = "white";
+}
+function dark()
+{
+darktheme()
+document.getElementById("switch").href = "javascript:location.reload()"
+document.getElementById("switch").innerHTML = "Go light"
+document.getElementById("switch").style.color = "white"
+}
+
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+function eraseCookie() {   
+setCookie('dark1','true1',-1);
+location.reload()
+}
+function rememberdark(){
+setCookie('dark1','true1',999);
+location.reload()
+}
+
+var user = getCookie("dark1");
+if (user != "") {
+window.open("javascript:dark()","_self")
+document.getElementById("hidecookie").innerHTML = ""
+document.getElementById("delete").style.visibility = "visible"
 }
 </script>
 </body></html>
