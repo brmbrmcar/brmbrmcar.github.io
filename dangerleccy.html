@@ -9,7 +9,7 @@ Power is measured in watts (joules per imperial second).
 <br/><br/>
 The significant figures are the amount of significant figures that the input potential difference and current and the output current, power and potential difference will be displayed to. Going above 20 may cause issues.
 <br/><br/>
-In most cases, the power will be identical input and output because there is just enough potential difference to push the current through. If the output is higher than the input then you can hit me with the power you put into it, unless you put in a negative number or something.
+In most cases, the power will be identical input and output because there is just enough potential difference to push the current through. If the output is higher than the input then you can hit me with the power you put into it, unless you put in a negative number or something. It could be just due to javascript's very poor square root function with large numbers however.
 <br/><br/><br/>
 
 Resistance (Ohms): <input type="number" id="resin" value="289" onclick="check()" onchange="check()">
@@ -27,8 +27,24 @@ Current (Amperes): <input type="number" id="curin17" value="289" onclick="check(
 Potential difference (Volts): <input type="number" id="potin17" value="4913" onclick="check()" onchange="check()">
 Significant figures: <input type="number" id="sigin17" value="5" onclick="check()" onchange="check()"> <button onclick="calcmaxres()">CALCULATE MAXIMUM RESISTANCE FOR THE CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
 <span id="resout17"></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
+
+
+<br/><br/><br/>
+Current/potential difference after passing through a resistance:
+<br/><br/>
+This third badly designed calculator will work out the output current, potential difference and power after passing through a specific resistance.
+<br/><br/><br/>
+Current (Amperes): <input type="number" id="curin289" value="289" onclick="check()" onchange="check()">
+Potential difference (Volts): <input type="number" id="potin289" value="4913" onclick="check()" onchange="check()">
+Resistance (Ohms): <input type="number" id="resin289" value="17" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin289" value="5" onclick="check()" onchange="check()"> <button onclick="calcaftres()">CALCULATE MAXIMUM RESISTANCE FOR THE CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
+<span id="curout289"></span><span id="potout289"></span><span id="powout289"></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 <script>
 current2 = 1
+cur289 = parseFloat(document.getElementById("curin289").value);
+pot289 = parseFloat(document.getElementById("potin289").value);
+res289 = parseFloat(document.getElementById("resin289").value);
+prec289 = parseFloat(document.getElementById("sigin289").value);
 cur17 = parseFloat(document.getElementById("curin17").value);
 pot17 = parseFloat(document.getElementById("potin17").value);
 prec17 = parseFloat(document.getElementById("sigin17").value);
@@ -42,6 +58,10 @@ prec = parseFloat(document.getElementById("sigin").value);
 cur17 = parseFloat(document.getElementById("curin17").value);
 pot17 = parseFloat(document.getElementById("potin17").value);
 prec17 = parseFloat(document.getElementById("sigin17").value);
+cur289 = parseFloat(document.getElementById("curin289").value);
+pot289 = parseFloat(document.getElementById("potin289").value);
+res289 = parseFloat(document.getElementById("resin289").value);
+prec289 = parseFloat(document.getElementById("sigin289").value);
 
 }
 high = 0
@@ -74,6 +94,21 @@ document.getElementById("count").innerHTML=""
 function calcmaxres(){
 out17 = (pot17*cur17)/Math.pow(cur17,2)
 document.getElementById("resout17").innerHTML=out17.toPrecision(prec17) + " ohms is the maximum resistance."
+}
+function calcaftres(){
+cur2289 = pot289/res289
+if (cur2289 >= cur289){
+curout289 = cur289
+pow289 = cur289*pot289
+}
+if (cur2289 < cur289){
+curout289 = cur2289
+pow289 = Math.pow(curout289,2)*res289
+}
+pot2289 = pow289/curout289
+document.getElementById("curout289").innerHTML=curout289.toPrecision(prec289) + " amperes of current and "
+document.getElementById("potout289").innerHTML=pot2289.toPrecision(prec289) + " volts of potential difference would output, resulting in a power of "
+document.getElementById("powout289").innerHTML=pow289.toPrecision(prec289) + " watts. "
 }
 
 function darktheme()
