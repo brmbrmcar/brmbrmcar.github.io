@@ -17,6 +17,26 @@ Power (Watts): <input type="number" id="powin" value="4913" onclick="check()" on
 Significant figures: <input type="number" id="sigin" value="5" onclick="check()" onchange="check()"> <button onclick="calcdanger()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
 <span id="current"></span><span id="pot"></span><span id="output"></span><span id="output2"></span><span id="output3"></span><span id="count"></span>
 
+<br/><br/><br/>
+Using just current and resistance:
+<br/><br/>
+This uses an input of current as opposed to power and assumes the minimal amount if potential difference is used.
+<br/><br/><br/>
+Resistance (Ohms): <input type="number" id="resin1.7" value="289" onclick="check()" onchange="check()">
+Current (Amperes): <input type="number" id="curin1.7" value="17" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin1.7" value="5" onclick="check()" onchange="check()"> <button onclick="calcdanger2()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
+<span id="current1.7"></span><span id="pot1.7"></span><span id="output1.7"></span><span id="output21.7"></span><span id="output31.7"></span>
+
+<br/><br/><br/>
+Using just potential difference and resistance:
+<br/><br/>
+This uses an input of potential as opposed to power and assumes there is the maximum current available or more that can be pushed through and will work out the most dangerous current/potential difference.
+<br/><br/><br/>
+Resistance (Ohms): <input type="number" id="resin117" value="289" onclick="check()" onchange="check()">
+Potential differnce (Volts): <input type="number" id="potin117" value="17" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin117" value="5" onclick="check()" onchange="check()"> <button onclick="calcdanger3()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
+<span id="current117"></span><span id="pot117"></span><span id="output117"></span><span id="output2117"></span><span id="output3117"></span>
+
 
 <br/><br/><br/>
 Maximum resistance for specific current/potential difference:
@@ -31,25 +51,75 @@ Significant figures: <input type="number" id="sigin17" value="5" onclick="check(
 <br/><br/><br/>
 Current/potential difference after passing through a resistance:
 <br/><br/>
-This third badly designed calculator will work out the output current, potential difference and power after passing through a specific resistance.
+This fifth badly designed calculator will work out the output current, potential difference and power after passing through a specific resistance.
 <br/><br/><br/>
 Current (Amperes): <input type="number" id="curin289" value="289" onclick="check()" onchange="check()">
 Potential difference (Volts): <input type="number" id="potin289" value="4913" onclick="check()" onchange="check()">
 Resistance (Ohms): <input type="number" id="resin289" value="17" onclick="check()" onchange="check()">
 Significant figures: <input type="number" id="sigin289" value="5" onclick="check()" onchange="check()"> <button onclick="calcaftres()">CALCULATE OUTPUT CURRENT AND POTENTIAL DIFFERENCE</button>
-<span id="curout289"></span><span id="potout289"></span><span id="powout289"></span><br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
+<span id="curout289"></span><span id="potout289"></span><span id="powout289"></span>
+
+<br/><br/><br/>
+Current/potential difference after passing through a resistance:
+<br/><br/>
+This sixth calculator will work out the resistance something went through by the input power, output power and resistance.
+<br/><br/><br/>
+Power in (Watts): <input type="number" id="powin4913" value="289" onclick="check()" onchange="check()">
+Power out (Watts): <input type="number" id="powout4913" value="289" onclick="check()" onchange="check()">
+Potential difference (Volts): <input type="number" id="potin4913" value="4913" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin4913" value="5" onclick="check()" onchange="check()"> <button onclick="calcthrores()">CALCULATE RESISTANCE THE POWER WENT THROUGH</button>
+<span id="resout4913"></span>
+
+<br/><br/><br/>
+Current/potential difference after passing through a resistance by output current:
+<br/><br/>
+This seventh calculator is similar to the sixth, but works from output current as opposed to potential difference.
+<br/><br/><br/>
+Power in (Watts): <input type="number" id="powin49" value="289" onclick="check()" onchange="check()">
+Power out (Watts): <input type="number" id="powout49" value="289" onclick="check()" onchange="check()">
+Current out (Amperes): <input type="number" id="curout49" value="4913" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin49" value="5" onclick="check()" onchange="check()"> <button onclick="calcthrores2()">CALCULATE RESISTANCE THE POWER WENT THROUGH</button>
+<span id="resout49"></span>
+
+<br/><br/><br/>
+Potential difference required to push a current through resistance:
+<br/><br/>
+This calculator will simply work out how much potential difference is needed to push a current through a certain resistance.
+<br/><br/><br/>
+Resistance (Ohms): <input type="number" id="resin491" value="289" onclick="check()" onchange="check()">
+Current (Amperes): <input type="number" id="curin491" value="4913" onclick="check()" onchange="check()">
+Significant figures: <input type="number" id="sigin491" value="5" onclick="check()" onchange="check()"> <button onclick="calcpotneed()">CALCULATE THE NEEDED POTENTIAL DIFFERENCE</button>
+<span id="potout491"></span>
+<br/><br/><span id="hidecookie"><a id="switch" href="javascript:dark()">Go dark</a> <a href="javascript:rememberdark()">Always use dark theme (extremely small cookie)</a> </span><a id="delete" style="visibility:hidden" href="javascript:eraseCookie()">Delete dark theme cookie</a>
 <script>
 current2 = 1
 cur289 = parseFloat(document.getElementById("curin289").value);
 pot289 = parseFloat(document.getElementById("potin289").value);
 res289 = parseFloat(document.getElementById("resin289").value);
 prec289 = parseFloat(document.getElementById("sigin289").value);
+powin4913 = parseFloat(document.getElementById("powin4913").value);
+powout4913 = parseFloat(document.getElementById("powout4913").value);
+potin4913 = parseFloat(document.getElementById("potin4913").value);
+prec4913 = parseFloat(document.getElementById("sigin4913").value);
+powin49 = parseFloat(document.getElementById("powin49").value);
+powout49 = parseFloat(document.getElementById("powout49").value);
+curout49 = parseFloat(document.getElementById("curout49").value);
+prec491 = parseFloat(document.getElementById("sigin491").value);
+resin491 = parseFloat(document.getElementById("resin491").value);
+curin491 = parseFloat(document.getElementById("curin491").value);
+prec49 = parseFloat(document.getElementById("sigin49").value);
 cur17 = parseFloat(document.getElementById("curin17").value);
 pot17 = parseFloat(document.getElementById("potin17").value);
 prec17 = parseFloat(document.getElementById("sigin17").value);
 res = parseFloat(document.getElementById("resin").value);
 power = parseFloat(document.getElementById("powin").value);
 prec = parseFloat(document.getElementById("sigin").value);
+res107 = parseFloat(document.getElementById("resin1.7").value);
+cur107 = parseFloat(document.getElementById("curin1.7").value);
+prec107 = parseFloat(document.getElementById("sigin1.7").value);
+res117 = parseFloat(document.getElementById("resin117").value);
+pot117 = parseFloat(document.getElementById("potin117").value);
+prec117 = parseFloat(document.getElementById("sigin117").value);
 function check() {
 res = parseFloat(document.getElementById("resin").value);
 power = parseFloat(document.getElementById("powin").value);
@@ -61,7 +131,23 @@ cur289 = parseFloat(document.getElementById("curin289").value);
 pot289 = parseFloat(document.getElementById("potin289").value);
 res289 = parseFloat(document.getElementById("resin289").value);
 prec289 = parseFloat(document.getElementById("sigin289").value);
-
+powin4913 = parseFloat(document.getElementById("powin4913").value);
+powout4913 = parseFloat(document.getElementById("powout4913").value);
+potin4913 = parseFloat(document.getElementById("potin4913").value);
+prec4913 = parseFloat(document.getElementById("sigin4913").value);
+powin49 = parseFloat(document.getElementById("powin49").value);
+powout49 = parseFloat(document.getElementById("powout49").value);
+curout49 = parseFloat(document.getElementById("curout49").value);
+prec49 = parseFloat(document.getElementById("sigin49").value);
+res107 = parseFloat(document.getElementById("resin1.7").value);
+cur107 = parseFloat(document.getElementById("curin1.7").value);
+prec107 = parseFloat(document.getElementById("sigin1.7").value);
+res117 = parseFloat(document.getElementById("resin117").value);
+pot117 = parseFloat(document.getElementById("potin117").value);
+prec117 = parseFloat(document.getElementById("sigin117").value);
+prec491 = parseFloat(document.getElementById("sigin491").value);
+resin491 = parseFloat(document.getElementById("resin491").value);
+curin491 = parseFloat(document.getElementById("curin491").value);
 }
 high = 0
 high2 = 0
@@ -90,6 +176,44 @@ document.getElementById("output2").innerHTML=high3.toPrecision(prec) + " watts a
 document.getElementById("output3").innerHTML=high4.toPrecision(prec) + " volts. "
 document.getElementById("count").innerHTML=""
 }
+function calcdanger2() {
+	power107 = Math.pow(cur107,2)*res107
+	current2107 = Math.sqrt(power107/res107)
+	pot107 = power107/current2107
+	now107 = current2107
+	high107 = now107
+	high1107 = pot107
+	high2107 = current2107
+        high3107 = Math.pow(now107,2)*res107
+        high4107 = high3107/now107
+	dangerout2()
+}
+function dangerout2(){
+document.getElementById("current1.7").innerHTML=high2107.toPrecision(prec107) + " amperes and "
+document.getElementById("pot1.7").innerHTML=high1107.toPrecision(prec107) + " volts is the most dangerous possible input. This results in an output of "
+document.getElementById("output1.7").innerHTML=high107.toPrecision(prec107) + " amperes, "
+document.getElementById("output21.7").innerHTML=high3107.toPrecision(prec107) + " watts and "
+document.getElementById("output31.7").innerHTML=high4107.toPrecision(prec107) + " volts. "
+}
+function calcdanger3() {
+	power117 = (pot117/res117)*pot117
+	current2117 = Math.sqrt(power117/res117)
+	pot117 = power117/current2117
+	now117 = current2117
+	high117 = now117
+	high1117 = pot117
+	high2117 = current2117
+        high3117 = Math.pow(now117,2)*res117
+        high4117 = high3117/now117
+	dangerout3()
+}
+function dangerout3(){
+document.getElementById("current117").innerHTML=high2117.toPrecision(prec117) + " amperes and "
+document.getElementById("pot117").innerHTML=high1117.toPrecision(prec117) + " volts is the most dangerous possible input. This results in an output of "
+document.getElementById("output117").innerHTML=high117.toPrecision(prec117) + " amperes, "
+document.getElementById("output2117").innerHTML=high3117.toPrecision(prec117) + " watts and "
+document.getElementById("output3117").innerHTML=high4117.toPrecision(prec117) + " volts. "
+}
 function calcmaxres(){
 out17 = (pot17*cur17)/Math.pow(cur17,2)
 document.getElementById("resout17").innerHTML=out17.toPrecision(prec17) + " ohms is the maximum resistance."
@@ -108,6 +232,41 @@ pot2289 = pow289/curout289
 document.getElementById("curout289").innerHTML=curout289.toPrecision(prec289) + " amperes of current and "
 document.getElementById("potout289").innerHTML=pot2289.toPrecision(prec289) + " volts of potential difference would output, resulting in a power of "
 document.getElementById("powout289").innerHTML=pow289.toPrecision(prec289) + " watts. "
+}
+
+function calcthrores(){
+cur4913 = powout4913/potin4913
+badres4913 = potin4913/(powin4913/potin4913)
+res4913 = potin4913/cur4913
+if (powin4913 == powout4913){
+document.getElementById("resout4913").innerHTML=  "The resistance was between 0 and " + badres4913.toPrecision(prec4913) + " ohms."
+}
+if (powin4913 < powout4913){
+document.getElementById("resout4913").innerHTML= "Stop being a ๓ฬ๓ค."
+}
+if (powin4913 > powout4913){
+document.getElementById("resout4913").innerHTML= "The resistance was  " + res4913.toPrecision(prec4913) + " ohms."
+}
+}
+
+function calcthrores2(){
+potin49 = powout49/curout49
+badres49 = potin49/(powin49/potin49)
+res49 = potin49/curout49
+if (powin49 == powout49){
+document.getElementById("resout49").innerHTML=  "The resistance was between 0 and " + badres49.toPrecision(prec49) + " ohms."
+}
+if (powin49 < powout49){
+document.getElementById("resout49").innerHTML= "Stop being a ๓ฬ๓ค."
+}
+if (powin49 > powout49){
+document.getElementById("resout49").innerHTML= "The resistance was  " + res49.toPrecision(prec49) + " ohms."
+}
+}
+
+function calcpotneed(){
+potout491 = curin491*resin491
+document.getElementById("potout491").innerHTML= potout491.toPrecision(prec491) + " volts of potential difference are needed."
 }
 
 function darktheme()
