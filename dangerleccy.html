@@ -9,13 +9,17 @@ Power is measured in watts (joules per imperial second).
 <br/><br/>
 The significant figures are the amount of significant figures that the input potential difference and current and the output current, power and potential difference will be displayed to. Going above 20 may cause issues.
 <br/><br/>
+The calculator will also attempt to work out whether alternating current or direct current would be more dangerous to a human, or whether both are likely to be fatal. Note that this should not be used expecting it to show any degree of real accuracy. In the case of a simple request of a fatal shock, the final calculator will work out the potential difference needed. In general, 0.15A is fatal.
+<br/><br/>
 In most cases, the power will be identical input and output because there is just enough potential difference to push the current through. If the output is higher than the input then you can hit me with the power you put into it, unless you put in a negative number or something. It could be just due to javascript's very poor square root function with large numbers however.
+<br/><br/>
+<font size="4" color="red"><b>THIS WEBPAGE AND ALL ITS CONTENTS ARE FOR EDUCATIONAL AND ENTERTAINMENT PURPOSES ONLY. ANY ELECTRICAL SAFETY CONCERNS SHOULD ALWAYS BE ADVISED BY A PROFESSIONAL. THE OWNER OF THIS WEBPAGE, THE HOSTS OF IT AND ANY CONTRIBUTORS MAY TAKE ABSOLUTELY <u>NO</u> RESPONSIBILITY FOR ANY HARM CAUSED TO YOURSELF OR OTHERS RESULTING FROM ABUSE OF THIS WEBPAGE.</b></font>
 <br/><br/><br/>
 
 Resistance (Ohms): <input type="number" id="resin" value="289" onclick="check()" onchange="check()">
 Power (Watts): <input type="number" id="powin" value="4913" onclick="check()" onchange="check()">
 Significant figures: <input type="number" id="sigin" value="5" onclick="check()" onchange="check()"> <button onclick="calcdanger()">CALCULATE MOST DANGEROUS CURRENT AND POTENTIAL DIFFERENCE LEVELS</button>
-<span id="current"></span><span id="pot"></span><span id="output"></span><span id="output2"></span><span id="output3"></span><span id="count"></span>
+<span id="current"></span><span id="pot"></span><span id="output"></span><span id="output2"></span><span id="output3"></span><span id="count"></span><span id="acdc"></span>
 
 <br/><br/><br/>
 Using just current and resistance:
@@ -175,6 +179,15 @@ document.getElementById("output").innerHTML=high.toPrecision(prec) + " amperes, 
 document.getElementById("output2").innerHTML=high3.toPrecision(prec) + " watts and "
 document.getElementById("output3").innerHTML=high4.toPrecision(prec) + " volts. "
 document.getElementById("count").innerHTML=""
+if (high <= 0.071) {
+document.getElementById("acdc").innerHTML="Direct current would likely be more dangerous to a human."
+}
+else if (high > 0.1 && high < 0.2) {
+document.getElementById("acdc").innerHTML="Both direct current and alternating current are likely to be fatal to a human."
+}
+else {
+document.getElementById("acdc").innerHTML="Alternating current would likely be more dangerous to a human."
+} 
 }
 function calcdanger2() {
 	power107 = Math.pow(cur107,2)*res107
