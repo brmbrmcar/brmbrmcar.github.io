@@ -1,32 +1,67 @@
-<html><body>
-<a href="https://github.com/brmbrmcar/brmbrmbot"><h1>brmbrmbot</h1></a>
-<br/><br/>
-brmbrmbot is a Discord bot that is largely open source running from a <a href="https://github.com/brmbrmcar/discord.js/tree/stable">modified version of Discord.js</a>, which uses crypto-js and Decimal.js libraries. Its identifiable discriptor is currently 491618805055750144 and this has a tag of brmbrmbot#0218. The old bot, with an identifiable descriptor of 476875155554172930 was unfortunately disabled and removed from all guilds on Anarchyday, 0005/5/5 or Tuesday 2018/09/18 UTC for reasons not relating to the bot itself.<br/><br/>
-
-<h2>Getting the bot:</h2></br>
-Before getting the bot, you must know that every message sent inside a channel it can see could potentially be seen with anyone with access to the bot, and bans become visible to everyone if the bot has ban permissions. In addition to this, with exception to functions banning a user (^copybans and ^ban), there are no permission restrictions to a user using a command based on roles, meaning that users could say things to channels they have no write access to with the ^say function, for example.<br/>
-This bot has some functions requiring manage webhooks and ban users permissions, however the majority of the bot will work fine without them. Especially for banning members, you may wish not to trust this bot, as its security may not be adequate compared to a much better designed bot. It is especially not recommended not to give the bots admin permissions, as read-only and private channels could have their restrictions bypassed by the bot.</br>
-To add the current 'official' version of the bot, if you have Manage Server/Guild permissions use <a href="https://discordapp.com/oauth2/authorize?client_id=491618805055750144&scope=bot">https://discordapp.com/oauth2/authorize?client_id=491618805055750144&scope=bot</a>. This has an uptime of around 97%, and is not run on a proper server. In addition to this, it is updated and rebooted frequently, making it potentially unstable, and as it is updated much more than the one uploaded to GitHub, it is not truly open source. I'd be very suprised if you wanted to, but to self host you first have to use the modified version of Discord.js from <a href="https://github.com/brmbrmcar/discord.js/tree/stable">https://github.com/brmbrmcar/discord.js/tree/stable</a>, install crypto-js and Decimal.js for all the commands to work and install ffmpeg and sox to your computer for command line usage. You can then add the new bot's token and encrypt key at the bottom of the file and run the file using node.js (a HTML version would be cool but I don't think I'll ever do it).<br/></br>
-
-<h2>Using the bot:</h2></br>
-The bot can be run in both guilds and direct messages. Currently group chats are not in the official bot, however using the self hosting method and setting up the OAuth in your bot should allow you to add this bot to them. Webhooks cannot use commands, and some commands are blocked for bots for security/spam reasons or don't work because bots cannot message each other currently. In order to see the current commands, please run ^help or ^help.force to force the response to remain in the same channel. This may not be a complete list of commands, either because a new comamnd is in testing or because a command is secret, likely because I don't even know what it does myself (feature requests).<br/>
-<h3>Basic Discord help:</h3><br/>
-For beginners, the bot may be quite hard to use, without knowledge of key terms such as tag or ID, or how to get them. A tag is the name#discriminator, such as brmbrmcar#1057. These are mostly shared for users to send each other friend requests, however the problem is that bot accounts cannot get an account's information or do any actions with it directly. This means that an identifiable descriptor, or ID, such as 460075269563351040, has to be used if the user is not cached. A cached user is one stored by the bot, and all users sharing a guild with a bot are cached, and new users can be added to the cache using ^cacheusers. A guild is the real name of a 'server' on Discord. These are also used for roles, emotes, channels and guilds, to prevent duplicate names. If the user is cached, or it is one of the four previously mentioned, their names can be looked up to get an ID with their finding tools. However, if the user is not cached, or a message is involved, you will have to get the ID yourself. To dop this, you will first have to enable Developer Mode, by going into your user settings and going to Appearance under Advanced. Once you have done that, you can right click on most things (roles currently don't work) and press Copy ID, which will add the ID to the clipboard for you to paste.<br/>
-Another thing you may notice is that if the user is not in the guild, their mention may show as <@id> like <@460075269563351040> or on mobile @invalid-user. The reasons for this are quite complicated, but normally the ID is shown with it, and if not, the <@id> can be used in place of an ID and ^messagein allows you to get the true ID if it is displaying as @invalid-user.<br/><br/>
-
-<h2>Questions and answers</h2><br/>
-<b>Can the host/owner see commands I've used or read my messages sent with it?</b> Not exactly, if not posted in DMs the channel can be read by anyone if the bot can still read it to see that the command was used if it was not deleted. Some errors are also logged, giving anonymised information on some of what the bot did in a command, however the rest of the information cannot be traced from this. Reversed content can also be viewed by the host, which is probably the greatest concern. But in general, commands are secret and we cannot read what you sent to other users with a ^message command without difficult digging and specific commands we can add in.</br>
-<b>How do I report something sent with one of the ^message commands?</b> Please send either the sender key or ID of the sender depending on what is shown to me (460075269563351040/brmbrmcar#1057, more contact details below) or vasker (349641421092814859/vasker#5598) with some basic information so that we can get details on it for a report to Trust and Safety. I understand that in some cases you may not wish to share much details of the abuse to us in many circumstances, but some will need to be provided to prove that it was an immoral action or a violation, otherwise the whole system will not be anonymous at all. Please also bear in mind that if the user deleted the message that caused the bot to pass on the message, Trust and Safety will not make any actions. We'll of course support you however if it puts you in a bad situation, and we can prevent the user from messaging.</br>
-<b>Can attachments be sent with messages?</b> One attachment can be sent per message (with the exception of using a webhook). I would add the ability to send more, however because I can't replicate this in my client I cannot test it, however you are welcome to help me.</br>
-<b>Why does right-to-left text in tags break commands?</b> I want to blame Discord for this one. The problem is that the discriminator and the username can be placed in the wrong order, meaning that it can become literally impossible to tell where the end is, as it often relies on the actual discriminator. What cannot be blamed entirely on Discord is that names are always placed before discriminators when forming a tag. However, the users should still be able to be found and their ID will still work.</br>
-<b>Why do deleted accounts sometimes cause problems?</b> It has to do with the fact that deleted guild owners still contain old information about them. This causes a conflict of sources, meaning that one name or tag may be shown by a command but not work for the user.</br>
-<b>Does the bot log deleted messages?</b> It does not. It does process them to notify a user if a message they sent through the bot was deleted, and count them. It may or may not still have the messages stored after this, I honestly don't know as this would be down to parts of the library I have not viewed. However, they cannot be accessed by any command and the bot cannot remember information between reboots.</br>
-<b>So then, why was the old bot disabled?</b> Well, 14 earth days previously, the account owning it had been disabled because I made too many new accounts too quickly. When the user finally got fully deleted later the bot could not be used. However, this has nothing to do with the bot itself, and previous emails from Trust and Safety show that they will not disable any new accounts or view them as a violation if I don't violate the terms of service again, although I do still heavily dispute that I ever did. So no need to worry.<br/><br/>
-
-<h2>Contact me:</h2><br/>
-Email: <a href="mailto:brmbrmcar.1.4913+botcontact@gmail.com">brmbrmcar.1.4913+botcontact@gmail.com</a></br>
-Discord: 460075269563351040/brmbrmcar#1057</br>
-Support guild: <a href="https://discordapp.com/invite/4ag7tTs">discord.gg/4ag7tTs</a> (489893277248651266) (is mostly for other things)</br>
+<html>
+    <head>
+        <title>brmbrmbot</title>
+        <style>
+	html {
+    background-color: #696969;
+}
+p {
+    text-indent: 1em;
+    color: white;
+}
+h1 {
+    text-align: center;
+}
+feildset {
+    background-color: blue;
+}
+a {
+    color: #14459b;
+    cursor: default;
+}
+legend {
+    font-size: 1.5em;
+}
+b {
+    color: black;
+}
+button {
+    font-size: 24px;
+    background-color: black;
+    border-color: black;  
+    color: grey;
+    padding: 25px 20px;
+}
+	</style>
+    </head>
+    <body>
+        <a href="https://github.com/brmbrmcar/brmbrmbot" style="text-decoration:none"><h1>brmbrmbot</h1></a><br><br>
+        <p>brmbrmbot is a Discord bot that is largely open source running from a <a href="https://github.com/brmbrmcar/discord.js/tree/stable">modified version of Discord.js</a>, which uses crypto-js and Decimal.js libraries. Its identifiable discriptor is currently 491618805055750144 and this has a tag of brmbrmbot#0218. The old bot, with an identifiable descriptor of 476875155554172930 was unfortunately disabled and removed from all guilds on Anarchyday, 0005/5/5 or Tuesday, 2018/09/18 UTC for reasons not relating to the bot itself.</p><br><br>
+        <h2>Getting the bot:</h2>
+        <p>Before getting the bot, you must know that every message sent inside a channel it can see could potentially be seen with <b style="color: white;"><i>anyone</i></b> with access to the bot, and bans become visible to everyone if the bot has ban permissions. In addition to this, with exception to functions banning a user (^copybans and ^ban), there are no permission restrictions to a user using a command based on roles, meaning that users could say things to channels they have no write access to with the ^say function, for example.<br><br></p>
+        <p>To add the current 'official' version of the bot, if you have Manage Server/Guild permissions use click the "add brmbrmbot" button at the very bottom of the. This has an uptime of around 97%, and is not run on a proper server. In addition to this, it is updated and rebooted frequently, making it potentially unstable, and as it is updated much more than the one uploaded to GitHub, it is not truly open source. I'd be very suprised if you wanted to, but to self host you first have to use the modified version of Discord.js from <a href="https://github.com/brmbrmcar/discord.js/tree/stable">https://github.com/brmbrmcar/discord.js/tree/stable</a>, install crypto-js and Decimal.js for all the commands to work and install ffmpeg and sox to your computer for command line usage. You can then add the new bot's token and encrypt key at the bottom of the file and run the file using node.js (a HTML version would be cool but I don't think I'll ever do it).</p>
+        <hr>
+        <h2>Using the bot:</h2>
+        <p>The bot can be run in both guilds and direct messages. Currently group chats are not in the official bot, however using the self hosting method and setting up the OAuth in your bot should allow you to add this bot to them. Webhooks cannot use commands, and some commands are blocked for bots for security/spam reasons or don't work because bots cannot message each other currently. In order to see the current commands, please run ^help or ^help.force to force the response to remain in the same channel. This may not be a complete list of commands, either because a new comamnd is in testing or because a command is secret, likely because I don't even know what it does myself (feature requests).</p>
+        <hr>
+        <h2>Basic Discord help:</h2>
+        <p>For beginners, the bot may be quite hard to use, without knowledge of key terms such as tag or ID, or how to get them. A tag is the name#discriminator, such as brmbrmcar#1057. These are mostly shared for users to send each other friend requests, however the problem is that bot accounts cannot get an account's information or do any actions with it directly. This means that an identifiable descriptor, or ID, such as 460075269563351040, has to be used if the user is not cached. A cached user is one stored by the bot, and all users sharing a guild with a bot are cached, and new users can be added to the cache using ^cacheusers. A guild is the real name of a 'server' on Discord. These are also used for roles, emotes, channels and guilds, to prevent duplicate names. If the user is cached, or it is one of the four previously mentioned, their names can be looked up to get an ID with their finding tools. However, if the user is not cached, or a message is involved, you will have to get the ID yourself. To dop this, you will first have to enable Developer Mode, by going into your user settings and going to Appearance under Advanced. Once you have done that, you can right click on most things (roles currently don't work) and press Copy ID, which will add the ID to the clipboard for you to paste.</p><br>
+        <p>Another thing you may notice is that if the user is not in the guild, their mention may show as &lt;@id&gt; like &lt;@460075269563351040&gt; or on mobile @invalid-user. The reasons for this are quite complicated, but normally the ID is shown with it, and if not, the &lt;@id&gt; can be used in place of an ID and ^messagein allows you to get the true ID if it is displaying as @invalid-user.</p><br><br><br>
+    <fieldset id="q&a">
+        <legend><b>Questions and answers</b></legend>
+        <b><p>Can the host/owner see commands I've used or read my messages sent with it?</b> Not exactly, if not posted in DMs the channel can be read by anyone if the bot can still read it to see that the command was used if it was not deleted. Some errors are also logged, giving anonymised information on some of what the bot did in a command, however the rest of the information cannot be traced from this. Reversed content can also be viewed by the host, which is probably the greatest concern. But in general, commands are secret and we cannot read what you sent to other users with a ^message command without difficult digging and specific commands we can add in.</p>
+        <b><p>How do I report something sent with one of the ^message commands?</b> Please send either the sender key or ID of the sender depending on what is shown to me (460075269563351040/brmbrmcar#1057, more contact details below) or vasker (349641421092814859/vasker#5598) with some basic information so that we can get details on it for a report to Trust and Safety. I understand that in some cases you may not wish to share much details of the abuse to us in many circumstances, but some will need to be provided to prove that it was an immoral action or a violation, otherwise the whole system will not be anonymous at all. Please also bear in mind that if the user deleted the message that caused the bot to pass on the message, Trust and Safety will not make any actions. We'll of course support you however if it puts you in a bad situation, and we can prevent the user from messaging.</p>
+        <b><p>Can attachments be sent with messages?</b> One attachment can be sent per message (with the exception of using a webhook). I would add the ability to send more, however because I can't replicate this in my client I cannot test it, however you are welcome to help me.</p>
+        <b><p>Why does right-to-left text in tags break commands?</b> I want to blame Discord for this one. The problem is that the discriminator and the username can be placed in the wrong order, meaning that it can become literally impossible to tell where the end is, as it often relies on the actual discriminator. What cannot be blamed entirely on Discord is that names are always placed before discriminators when forming a tag. However, the users should still be able to be found and their ID will still work.</p>
+        <b><p>Why do deleted accounts sometimes cause problems?</b> It has to do with the fact that deleted guild owners still contain old information about them. This causes a conflict of sources, meaning that one name or tag may be shown by a command but not work for the user.</p>
+        <b><p>Does the bot log deleted messages?</b> It does not. It does process them to notify a user if a message they sent through the bot was deleted, and count them. It may or may not still have the messages stored after this, I honestly don't know as this would be down to parts of the library I have not viewed. However, they cannot be accessed by any command and the bot cannot remember information between reboots.<p>
+        <b><p>So then, why was the old bot disabled?</b> Well, 14 earth days previously, the account owning it had been disabled because I made too many new accounts too quickly. When the user finally got fully deleted later the bot could not be used. However, this has nothing to do with the bot itself, and previous emails from Trust and Safety show that they will not disable any new accounts or view them as a violation if I don't violate the terms of service again, although I do still heavily dispute that I ever did. So no need to worry.<br>
+    </fieldset><br><br>
+<a href="javascript:location.href='https://discordapp.com/oauth2/authorize?client_id=491618805055750144&scope=bot'"><button class="addbrmbrm">Get brmbrmbot</button></a>
+<h2>Contact me:</h2>
+Email: <a href="mailto:brmbrmcar.1.4913+botcontact@gmail.com">brmbrmcar.1.4913+botcontact@gmail.com</a><br>
+Discord: 460075269563351040/brmbrmcar#1057<br>
+Support guild: <a href="https://discordapp.com/invite/4ag7tTs">discord.gg/4ag7tTs</a> (489893277248651266) (is mostly for other things)<br>
 Join/leave logging guild: <a href="https://discordapp.com/invite/WKuB5dx">discord.gg/WKuB5dx</a> (495999104015532062)
-
-</body></html>
+</body>
+</html>
