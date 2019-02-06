@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>High precision calculator</title>
+<link rel="shortcut icon" type="image/png" href="calculator.png"></link>
+<script src="bigfraction.js"></script>
+<script src="brmbrmfunctions.js"></script>
+<script> 
+  function calculate(fraction = false) {
+   answer = fraction ? eval(document.getElementById("quest").value + ".toFraction()") : eval(document.getElementById("quest").value)
+   document.getElementById("answer").value = answer
+   document.getElementById("answer").size = answer.toString().length * 2
+  }
+</script>
+</head>
+<body>
+<input id="quest" type="text" size="100"></input> <button onclick="calculate()">=</button> <button onclick="calculate(true)">F</button></br>
+<input id="answer" type="text" readonly></input>
+</body>
+</html>
