@@ -15,5 +15,6 @@
 <body>
 <input id="quest" type="text" size="100"></input> <button onclick="calculate()">=</button> <button onclick="calculate(true)">F</button></br>
 <input id="answer" type="text" readonly></input><br/><a href="https://github.com/infusion/Fraction.js">Thanks to https://github.com/infusion/Fraction.js.</a>
+<script>  if (window.location.href.toString().split("?")[1]) document.getElementById("quest").value = decodeURIComponent(window.location.href.toString().split("?")[1])</script>
 </body>
 </html>
