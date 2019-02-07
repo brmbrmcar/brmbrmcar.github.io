@@ -24,7 +24,7 @@ function exponent(fraction, exponent, iter = 100) { // partially stolen algorith
 }
 function calce(iter = 21) {
     var iter = BigInt(iter)
-    var e2 = Fraction('2')
+    e2 = Fraction('2')
     var factr = BigInt('1')
     var factrc = BigInt('2')
     var bigone = 1n
