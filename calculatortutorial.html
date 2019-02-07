@@ -6,15 +6,33 @@
 <script src="brmbrmfunctions.js"></script>
 <script> 
   function calculate(fraction = false) {
-   answer = fraction ? eval(document.getElementById("quest").value + ".toFraction()") : eval(document.getElementById("quest").value)
+   answer = fraction ? fraction === "rough" ? eval(document.getElementById("quest").value + ".valueOf()") : eval(document.getElementById("quest").value + ".toFraction()") : eval(document.getElementById("quest").value)
+   document.getElementById("share").innerHTML = "Want to share this calculation? Use this link: <a href=\"" + window.location.href.toString().split("?")[0] + "?" + encodeURIComponent(document.getElementById("quest").value) + "\">" + window.location.href.toString().split("?")[0] + "?" + encodeURIComponent(document.getElementById("quest").value) + "</a>"
    document.getElementById("answer").value = answer
    document.getElementById("answer").size = answer.toString().length * 2
   }
 </script>
 </head>
 <body>
-<input id="quest" type="text" size="100"></input> <button onclick="calculate()">=</button> <button onclick="calculate(true)">F</button></br>
-<input id="answer" type="text" readonly></input><br/><a href="https://github.com/infusion/Fraction.js">Thanks to https://github.com/infusion/Fraction.js.</a>
+<input id="quest" type="text" size="100"></input> <button onclick="calculate()">=</button> <button onclick="calculate('rough')">≈</button> <button onclick="calculate(true)">F</button></br>
+<input id="answer" type="text" readonly></input><br/><a href="https://github.com/infusion/Fraction.js">Thanks to https://github.com/infusion/Fraction.js.</a><br/>
+BigFraction functions: <a href="https://github.com/infusion/Fraction.js/blob/master/README.md">https://github.com/infusion/Fraction.js/blob/master/README.md</a>.<br/>
+Pi calculation: <i>calcpi({iterations})</i> Returns a Fraction with a calculated estimate of Pi. The latest calculation can be called with <i>pi2</i>.</br>
+e calculation: <i>calce({iterations})</i> Returns a Fraction with a calculated estimate of e. The latest calculation can be called with <i>e2</i>.</br>
+Pi: <i>pi</i> Returns a Fraction of Pi pre-calculated precisely to 1000 decimal places.</br>
+e: <i>e</i> Returns a Fraction of e pre-calculated precisely to 1000 decimal places.</br>
+Exponent: <i>exponent(base, exponent, {iterations})</i> Returns a Fraction representing an exponented value. <i>base.pow(exponent)</i> should be used instead for integer exponents, as it is much faster and more accurate.</br>
+Logarithm: <i>logarithm(base, number, {iterations})</i> Returns a Fraction representing a logarithm. However, it is very broken and slow, so usage is not recommended.</br>
+<i>=</i> will convert the answer to an exact decimal. This is not recommended for outputs of <i>calcpi()</i> or complicated divisions as the outputs would be possibly billions of digits long (although a few million digits shouldn't take long on modern computers, many more start to cause problems). In these cases, <i>F</i> should be used, which will output an exact fraction. <i>≈</i> can also sometimes be used, which will output an imprecise floating point decimal, in order to visualise complicated fractions which cannot be converted with <i>=</i>, however these may not work with very complicated fractions either.</br>
+In general, entered numeric values should be placed within quotes (<i>'</i> or <i>"</i>) to ensure precision (examples below). There is a general upper limit of this calculator (don't blame me) but it's probably too high for reasonable calculations that can be done in a browser.</br>
+Good examples:</br>
+<i>Fraction('4913').pow('4913')</i></br>
+<i>Fraction('1').div('4913')</i></br>
+<i>pi.sub(calcpi())</i> <b>DO NOT USE <i>=</i></b></br>
+<i>exponent(e, '2.5')</i></br>
+<i>Fraction('2').pow('82589933').sub('1')</i></br>
+<i><b>"It doesn't work at all!"</b></i> Make sure your browser supports BigInt.<br/>
+<span id="share"></span>
 <script>  if (window.location.href.toString().split("?")[1]) document.getElementById("quest").value = decodeURIComponent(window.location.href.toString().split("?")[1])</script>
 </body>
 </html>
