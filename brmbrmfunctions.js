@@ -36,7 +36,7 @@ function calce(iter = 21) {
     }
     return e2
 }
-function calcpi(iter = 100) { // stolen algorithm
+function calcpi(iter = 20) { // stolen algorithm
     var S = Fraction('13591409')
     var K = Fraction('6')
     var M = Fraction('1')
@@ -58,10 +58,11 @@ function calcpi(iter = 100) { // stolen algorithm
         K = K.add(bigtwelve)
 	countr += 1n
     }
-    pi2 = Fraction('426880').mul(exponent('10005', '0.5')).div(S)
+    var toiter = iter > 100n ? iter : 100n
+    pi2 = Fraction('426880').mul(exponent('10005', '0.5', toiter)).div(S)
     return pi2
 }
-function logarithm(base, numb, iter = 100, places = 1) {
+function logarithm(base, numb, iter = 100, places = 0) {
     var base = Fraction(base)
     var numb = Fraction(numb)
     if (numb.compare('1') < 0) numb = Fraction('1').div(numb)
