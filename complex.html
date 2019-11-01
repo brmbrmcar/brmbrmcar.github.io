@@ -1,0 +1,303 @@
+<meta charset="utf-8">
+<script src="https://cdn.jsdelivr.net/gh/brmbrmcar/complexfraction@master/complexfraction.js"></script>
+<body style="font-family:'Lucida Console', Monaco, monospace">
+Use ( and ) around a recurring part. You may change the base system.
+<br/><br/>
+<input type="text" id="r1" value="0.(3)"></input>+<input type="text" id="r2" value="-3"></input>i <select id="x1"><option value="add">add</option><option value="sub">sub</option><option value="mul">mul</option><option value="div">div</option><option value="pow">pow</option></select> <input type="text" id="r3" value="2.7(1)"></input>+<input type="text" id="r4" value="5.6"></input>i <button type="button" onClick="calc1()">=</button> <span id="output1"></span> <span style="position: absolute; right:0px">Base: <input type="text" value="0123456789" id="base1"></input></span>
+<br/>
+<input type="text" id="r5" value="0.(3)"></input>+<input type="text" id="r6" value="-3"></input>i <select id="x2"><option value="intrpow">intrpow</option></select> <input type="text" id="r7" value="4"></input> <button type="button" onClick="calc2()">=</button> <span id="output2"></span> <span style="position: absolute; right:0px">Base: <input type="text" value="0123456789" id="base2"></input></span>
+<br/>
+<input type="text" id="r8" value="0.(3)"></input>+<input type="text" id="r9" value="-3"></input>i <select id="x3"><option value="sqrt">sqrt</option><option value="cbrt">cbrt</option><option value="abs">abs</option><option value="arg">arg</option><option value="ln">ln</option><option value="exp">exp</option><option value="sin">sin</option><option value="cos">cos</option><option value="tan">tan</option><option value="asin">asin</option><option value="acos">acos</option><option value="atan">atan</option><option value="sinh">sinh</option><option value="cosh">cosh</option><option value="tanh">tanh</option><option value="asinh">asinh</option><option value="acosh">acosh</option><option value="atanh">atanh</option></select> <button type="button" onClick="calc3()">=</button> <span id="output3"></span> <span style="position: absolute; right:0px">Base: <input type="text" value="0123456789" id="base3"></input></span>
+<br/>
+Modulus: <input type="text" id="r10" value="5.(3)"></input> Argument: <input type="text" id="r11" value="1.5"></input> <button type="button" onClick="calc4()">=</button> <span id="output4"></span> <span style="position: absolute; right:0px">Base: <input type="text" value="0123456789" id="base4"></input></span>
+<br/><br/>
+Functions:
+<br/>
+<br/>add - Adds two complex numbers together
+<br/>sub - Subtracts the second complex number from the first
+<br/>mul - Multiplies two complex numbers together
+<br/>div - Divided the first complex number by the second
+<br/>pow - Raises the first complex number by the second
+<br/>
+<br/>intrpow - Raises the complex number by the real integer
+<br/>
+<br/>sqrt - Estimates the square root of the complex number
+<br/>cbrt - Estimates the cube root of the complex number
+<br/>abs - Estimates the absolute value/modulus of the complex number
+<br/>arg - Estimates the argument of the complex number
+<br/>ln - Estimates the natural logarithm of the complex number
+<br/>exp - Raises e by the complex number
+<br/>sin - Estimates the sine of the complex number
+<br/>cos - Estimates the cosine of the complex number
+<br/>tan - Estimates the tangent of the complex number
+<br/>asin - Estimates the inverse sine of the complex number
+<br/>acos - Estimates the inverse cosine of the complex number
+<br/>atan - Estimates the inverse tangent of the complex number
+<br/>sinh - Estimates the hyperbolic sine of the complex number
+<br/>cosh - Estimates the hyperbolic cosine of the complex number
+<br/>tanh - Estimates the hyperbolic tangent of the complex number
+<br/>asinh - Estimates the inverse hyperbolic sine of the complex number
+<br/>acosh - Estimates the inverse hyperbolic cosine of the complex number
+<br/>atanh - Estimates the inverse hyperbolic tangent of the complex number
+<br/>
+<br/>The modulus/absolute value and the argument of a complex number can also be turned into a complex number with the form a+bi.
+<br/><br/><br/>
+<br/>This works by turning the strings inputted in a specific base into a ratio of four BigInts; two for the real part (numerator and denominator), and two for the imaginary. It then uses <a href="https://github.com/brmbrmcar/ComplexFraction">https://github.com/brmbrmcar/ComplexFraction</a> to perform the calculations, and the results are then turned back into a string with the provided base system. The end results are limited to fifty places after the '.' so that the information fits. In reality, the non-exact functions are nowhere near this precise on the settings used for this page.
+<br/>
+<br/>The conversion between strings and fractions uses some old code I used for a now deleted project, which is why it does not look particularly fitting for this page. The strings are converted into fractions by splitting the string into the integer part, the terminating fractional part and the recurring fractional part. The integer part is turned into a number by multiplying each character's position in the base string and the base length to the power of its distance from the '.'. The values of these characters are the added together. The terminating fractional part is processed in a similar way, but at the end it is divided by its base length to the power of its length. The recurring part is also calculated in a similar way, but it is divided by not only what the terminating decimal part was, but also its base length to the power of its length all subtracted by one. These are then added together to make a single fraction, and the same is done to the other strings provided. These can then be entered into the complex number library.
+<br/>
+<br/>The fraction is then converted into a string by first finding the value of the integer part by dividing the numerator by the denominator and rounding towards zero. The remainder from dividing the integer part by the base length is calculated, and this position in the base string is added to the front of the output string. This remainder is then subtracted from the integer value and the integer value is divided by the base length. This is repeated until the integer value is zero. The integer value is subtracted from the total value of the fraction to find the fraction of the fractional parts. The factors of the base length are found, and the minimum number of these that can divide the fractional value represents the length of the terminating fractional part. The recurring part will be equal to a fraction with a denominator one less than a power of the base length. The power is equal to the length of the recurring part. The fractional part is then calculated using a process very similar to short division. After all the terminating characters are found, a '(' is placed, if there is a recurring part. Once all the recurring characters are found, a ')' is found and the string is created! A '-' is placed at the start if the fraction is negative. This is then concatenated with the other complex string to make the output.
+<br/>
+<br/>Fractions are stored as followed: real numerator (BigInt), real denominator (BigInt), real negative? (Boolean), imaginary numerator (BigInt), imaginary denominator (BigInt), imaginary negative? (Boolean), along with all the functions that may be performed on them.
+<br/>
+<br/>Adding is done by making the real and imaginary parts have the same denominators as their corresponding parts in the other object. This is done by multiplying both the numerator and the denominator by the opposite denominator. If a particular part's negativity is 'true', its numerator is multiplied by -one to make it negative. The numerators can then simply be added together to make a single object.
+<br/>
+<br/>Subtracting is very similar to adding, except the numerators are subtracted instead of added.
+<br/>
+<br/>When multiplying, if a part is negative, its numerator will be multiplied by -one. The real part is found by multiplying the real numerators and denominators together and subtracting from this the imaginary numerators and denominators muliplied together. The imaginary part is calculated by multiplying the real numerators and denominators by their opposite imaginary numerators and denominators and adding the results.
+<br/>
+<br/>Dividing is performed by multiplying the first complex number by the reciprocal of the second. The reciprocal of the complex number is found by multiplying the real and imaginary denominators of its conjugate by the conjugate multiplied by the complex number.
+<br/>
+<br/>Raising one complex number to the power of another is done by taking the natural logarithm of the base, multiplying this by the exponent and raising e to the power of all of this.
+<br/>
+<br/>Raising a complex number to an integer power is done by multiplying the complex number by itself the exponent-one times. If the power is negative, the reciprocal of the result is returned.
+<br/>
+<br/>The square root and cube root functions use Newton's method. The seed is determined based on whether the complex number is a positive real, a negative real or has an imaginary part.
+<br/>
+<br/>The absolute value is found by squaring the real and imarginary fractions, adding them and then finding the square root of the result.
+<br/>
+<br/>The argument is found by subtracting the real part from the absolute value, dividing this by the imaginary fraction, finding the inverse tangent of all this and multiplying by two.
+<br/>
+<br/>The natural logarithm is found using the identity ln(x) = ln(r) + iy, where re^(iy) = x. y is merely the argument of the function, and r is the absolute value. The natural log of the absolute value is found using the series expansion for the inverse hyperbolic tangent. This is made more effecient by taking it's reciprocal and making the result negative wen r is below one and removing ln(two) repeatedly to get a faster convergence.
+<br/>
+<br/>Raising e to the power of a complex number uses a power series. This is made more effecient by making the imaginary part as close to zero as possible, using the fact that it will remain equal when two*pi is subtracted or added to it, and subtracting two from the exponent and multiplying it by e^two.
+<br/>
+<br/>Sine, cosine, tangent and their hyperbolic equivalents are estimated using their exponential forms.
+<br/>
+<br/>Inverse sine, inverse cosine, their hyperbolic equivalents and inverse hyperbolic tangent are estimated using their logarithmic forms (rearranged from their exponential forms).
+<br/>
+<br/>The inverse tangent is calculated mostly using its own series, however for some complex values it uses natural logarithms as they would not converge otherwise.
+<script>
+var calc1 = function calc1() {
+   var in1 = fromString(document.getElementById('r1').value, document.getElementById('r2').value, document.getElementById('base1').value)
+   var in2 = fromString(document.getElementById('r3').value, document.getElementById('r4').value, document.getElementById('base1').value)
+   var type = document.getElementById('x1').value
+   if (type == 'add') document.getElementById('output1').innerHTML = toString(in1.add(in2), 50n, document.getElementById('base1').value)
+   if (type == 'sub') document.getElementById('output1').innerHTML = toString(in1.sub(in2), 50n, document.getElementById('base1').value)
+   if (type == 'mul') document.getElementById('output1').innerHTML = toString(in1.mul(in2), 50n, document.getElementById('base1').value)
+   if (type == 'div') document.getElementById('output1').innerHTML = toString(in1.div(in2), 50n, document.getElementById('base1').value)
+   if (type == 'pow') document.getElementById('output1').innerHTML = toString(in1.pow(in2), 50n, document.getElementById('base1').value)
+}
+
+var calc2 = function calc2() {
+   var in1 = fromString(document.getElementById('r5').value, document.getElementById('r6').value, document.getElementById('base2').value)
+   var in2 = fromString(document.getElementById('r7').value, document.getElementById('base2').value[0], document.getElementById('base2').value)
+   if (in2.sr) in2.nr = -in2.nr
+   document.getElementById('output2').innerHTML = toString(in1.intrpow(in2.nr), 50n, document.getElementById('base2').value)
+}
+
+var calc3 = function calc3() {
+   var in1 = fromString(document.getElementById('r8').value, document.getElementById('r9').value, document.getElementById('base3').value)
+   var type = document.getElementById('x3').value
+   if (type == 'sqrt') document.getElementById('output3').innerHTML = toString(in1.sqrt(), 50n, document.getElementById('base3').value)
+   if (type == 'cbrt') document.getElementById('output3').innerHTML = toString(in1.cbrt(), 50n, document.getElementById('base3').value)
+   if (type == 'abs') document.getElementById('output3').innerHTML = toString(in1.abs(), 50n, document.getElementById('base3').value)
+   if (type == 'arg') document.getElementById('output3').innerHTML = toString(in1.arg(), 50n, document.getElementById('base3').value)
+   if (type == 'ln') document.getElementById('output3').innerHTML = toString(in1.ln(), 50n, document.getElementById('base3').value)
+   if (type == 'exp') document.getElementById('output3').innerHTML = toString(in1.exp(), 50n, document.getElementById('base3').value)
+   if (type == 'sin') document.getElementById('output3').innerHTML = toString(in1.sin(), 50n, document.getElementById('base3').value)
+   if (type == 'cos') document.getElementById('output3').innerHTML = toString(in1.cos(), 50n, document.getElementById('base3').value)
+   if (type == 'tan') document.getElementById('output3').innerHTML = toString(in1.tan(), 50n, document.getElementById('base3').value)
+   if (type == 'asin') document.getElementById('output3').innerHTML = toString(in1.asin(), 50n, document.getElementById('base3').value)
+   if (type == 'acos') document.getElementById('output3').innerHTML = toString(in1.acos(), 50n, document.getElementById('base3').value)
+   if (type == 'atan') document.getElementById('output3').innerHTML = toString(in1.atan(), 50n, document.getElementById('base3').value)
+   if (type == 'sinh') document.getElementById('output3').innerHTML = toString(in1.sinh(), 50n, document.getElementById('base3').value)
+   if (type == 'cosh') document.getElementById('output3').innerHTML = toString(in1.cosh(), 50n, document.getElementById('base3').value)
+   if (type == 'tanh') document.getElementById('output3').innerHTML = toString(in1.tanh(), 50n, document.getElementById('base3').value)
+   if (type == 'asinh') document.getElementById('output3').innerHTML = toString(in1.asinh(), 50n, document.getElementById('base3').value)
+   if (type == 'acosh') document.getElementById('output3').innerHTML = toString(in1.acosh(), 50n, document.getElementById('base3').value)
+   if (type == 'atanh') document.getElementById('output3').innerHTML = toString(in1.atanh(), 50n, document.getElementById('base3').value)
+}
+
+var calc4 = function calc4() {
+   var in1 = fromString1(document.getElementById('r10').value, document.getElementById('base4').value)
+   var in2 = fromString1(document.getElementById('r11').value, document.getElementById('base4').value)
+   if (in1[2]) in1[0] = -in1[0]
+   if (in2[2]) in2[0] = -in2[0]
+   document.getElementById('output4').innerHTML = toString(newFractionM(in1[0], in1[1], in2[0], in2[1]), 50n, document.getElementById('base4').value)
+}
+var toString = function toString(obj, dp = 100n, base = '0123456789', irec) {
+   obj = obj.sim()
+   var obj1 = {numr: obj.nr, demr: obj.dr, neg: obj.sr}
+   var obj2 = {numr: obj.ni, demr: obj.di, neg: obj.si}
+   obj1 = toString1(obj1, dp, base)
+   obj2 = toString1(obj2, dp, base)
+   return obj2.startsWith('-') ? obj1+obj2+'i' : obj1+'+'+obj2+'i'
+}
+
+var toString1 = function toString1(obj, dp, base, irec = false) { // from the now deprecated fraction:js I created a few months back
+   var str = obj.neg ? '-' : ''
+   var basel = BigInt(BigInt(base.length))
+   var pray = irec ? null : allf(basel)
+   if (!obj.numr) return base[0n]
+   var sfloor = obj.numr / obj.demr
+   var infi = dp == -1n ? true : false
+   if (sfloor) { 
+      obj.numr = obj.numr % obj.demr
+      var intpart = ''
+      var toconv = sfloor
+      while (toconv > 0n) {
+         intpart = base[toconv % basel] + intpart
+         toconv = (toconv - (toconv % basel)) / basel
+      }
+      str += intpart
+   }
+   if (!obj.numr || dp == 0n) {
+      return str
+   }
+   if (str.replace("-",'') == '') str += base[0n]
+   str += "."
+   var lobjdemr = obj.demr
+   var rlen = 0n
+   var notfull = false
+   var rslen = 0n
+   if (!irec) {
+      for (var prf of pray) { // used to be prime factors, why there's a weird name
+         while (lobjdemr % prf == 0n) {
+            lobjdemr /= prf
+            rslen += 1n
+         }
+      }
+   }
+   if (lobjdemr == 1n || irec) rlen = 0n
+   else { // there's probably a better and much faster way to do this, probably alongside the other calculation, but i haven't figured out
+      var rlen = 1n
+      var rem = basel % lobjdemr
+      var udp = dp
+      udp -= rslen
+      while (rem != 1n) {
+         rlen += 1n
+         rem = rem * basel % lobjdemr
+         if (!infi && udp < rlen) {
+            rlen = 0n
+            notfull = true
+            break
+         }
+      }
+   }
+   obj.numr *= basel
+   var rltest = rlen
+   var accur = true
+   if (!notfull && rlen) {
+      while (rslen > 0n) {
+         var toaddpos = obj.numr / obj.demr
+         str += base[toaddpos | 0n]
+         obj.numr %= obj.demr
+         obj.numr *= basel
+         rslen -= 1n
+      }
+      str += "("
+      while (rlen > 0n) {
+         var toaddpos = obj.numr / obj.demr
+         str += base[toaddpos | 0n]
+         obj.numr %= obj.demr
+         obj.numr *= basel
+         rlen -= 1n
+      }
+      str += ")"
+   }
+   else {
+      var countlen = 1n
+      while (obj.numr) {
+         var toaddpos = obj.numr / obj.demr | 0n
+         str += base[toaddpos]
+         obj.numr %= obj.demr
+         obj.numr *= basel
+         countlen += 1n
+         if (!infi && dp < countlen) {
+            accur = !Boolean(obj.numr)
+            break
+         }
+      }
+   }
+   return str
+}
+
+var allf = function alldivs(a) {
+   if (a == 2n || a == 3n) return [a]
+   var test = 2n
+   var pray = [a]
+   while (test < a) {
+      if (a % test == 0n) pray.push(test)
+      test += 1n
+   }
+   pray.sort() // not very fast but it doesn't matter too much
+   return pray
+}
+
+
+var fromString1 = function fromString(a, base) {
+      var anegative = a.includes("-") ? true : false
+      a = a.replace("-","")
+      a = a.split(".")
+      var aint = a[0n]
+      var afra = a[1n] ? a[1n] : false
+      while (aint.startsWith(base[0n])) {
+         aint = aint.replace(base[0n], '')
+      }
+      var aintmax = 0n
+      var aintcountd = BigInt(aint.length)
+      aint = aint.split('').reverse()
+      while (aintcountd > 0n) {
+         aintmax += BigInt(base.indexOf(aint[aintcountd-1n])) * (BigInt(base.length) ** (aintcountd - 1n))
+         aintcountd = aintcountd - 1n
+      }
+      if (aintmax < 1n) aintmax = 0n
+      aint = aintmax
+      if (afra) {
+         afra = afra.split("(")
+         var afrt = afra[0n]
+         var afrr = afra[1n] ? afra[1n].replace(")","") : false
+         var afrtdl = BigInt(afrt.length) + 1n
+         var afrtd = BigInt(base.length) ** afrtdl
+         var afrtmax = 0n
+         var afrtcountd = BigInt(afrt.length)
+         afrt = afrt.split('').reverse()
+         while (afrtcountd > 0n) {
+            afrtmax += BigInt(base.indexOf(afrt[afrtcountd-1n])) * (BigInt(base.length) ** (afrtcountd - 1n))
+            afrtcountd = afrtcountd - 1n
+         }
+         if (afrtmax < 1n) afrtmax = 0n
+         afrt = afrtmax * BigInt(base.length)
+         if (afrr) {
+            var afrrdl = BigInt(afrr.length)
+            var afrrd = (BigInt(base.length) ** afrrdl) - 1n
+            var afrrmax = 0n
+            var afrrcountd = BigInt(afrr.length)
+            afrr = afrr.split('').reverse()
+            while (afrrcountd > 0n) {
+               afrrmax += BigInt(base.indexOf(afrr[afrrcountd-1n])) * (BigInt(base.length) ** (afrrcountd - 1n))
+               afrrcountd = afrrcountd - 1n
+            }
+            if (afrrmax < 1n) afrrmax = 0n
+            afrr = afrrmax * BigInt(base.length)
+            afrt = afrt * afrrd
+            afrtd = afrrd * afrtd
+            afrt = afrt + afrr
+         }
+         tomulb = afrtd
+         aint = aint * afrtd
+         aint = aint + afrt
+      }
+      return [aint, afrtd || 1n, anegative]
+}
+
+var fromString = function fromString(a, b, base) {
+    string1 = fromString1(a, base)
+    string2 = fromString1(b, base)
+    outf = newFraction(BigInt(string1[0]), BigInt(string1[1]), BigInt(string2[0]), string2[1]).sim()
+    outf.sr = string1[2]
+    outf.si = string2[2]
+    return outf
+}
+</script></body>
