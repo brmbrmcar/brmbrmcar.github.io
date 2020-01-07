@@ -1,0 +1,105 @@
+<html>
+<head>
+<script>
+const english = ["The authority of the state should be challenged.","Whether a person has a right to do something is dependent on its legality.","Identity is something of importance.","Objectively, some living creatures have more moral worth than others.","Even through significant political disagreement, a nation should always remain united.","Whether or not it is a good thing to do, people have a right to use violence against unjustifiably violent groups.","The existence of a state can be just.","Traditionalism can be described as a 'dangerous, emotional reaction'.","Some acts that do not impact other people's lives can be considered immoral.","It is right and true that political discussions should sometimes be deliberately avoided."]
+const questions = english
+function scorestr(score) {
+   score *= 10n
+   const characters = "0123456789"
+   var str = "0."
+   str += characters[score/BigInt(questions.length)]
+   score = (score % BigInt(questions.length))*10n
+   str += characters[score/BigInt(questions.length)]
+   return str
+}
+function scoref() {
+   var score = 0n
+   if (document.getElementById("r0").checked) score += 1n
+   if (document.getElementById("r1").checked) score += 1n
+   if (document.getElementById("r2").checked) score += 1n
+   if (document.getElementById("r3").checked) score += 1n
+   if (document.getElementById("r4").checked) score += 1n
+   if (document.getElementById("r5").checked) score += 1n
+   if (document.getElementById("r6").checked) score += 1n
+   if (document.getElementById("r7").checked) score += 1n
+   if (document.getElementById("r8").checked) score += 1n
+   if (document.getElementById("r9").checked) score += 1n
+   if (document.getElementById("l0").checked) score -= 1n
+   if (document.getElementById("l1").checked) score -= 1n
+   if (document.getElementById("l2").checked) score -= 1n
+   if (document.getElementById("l3").checked) score -= 1n
+   if (document.getElementById("l4").checked) score -= 1n
+   if (document.getElementById("l5").checked) score -= 1n
+   if (document.getElementById("l6").checked) score -= 1n
+   if (document.getElementById("l7").checked) score -= 1n
+   if (document.getElementById("l8").checked) score -= 1n
+   if (document.getElementById("l9").checked) score -= 1n
+   if (!score) document.getElementById("result").innerHTML = "Score: 0.00 (complete centre)"
+   else if (score < 0n) {
+      score = -score
+      if (score == questions.length) document.getElementById("result").innerHTML = "Score: 1.00 left"
+      else document.getElementById("result").innerHTML = "Score: " + scorestr(score) + " left"
+   }
+   else {
+      if (score == questions.length) document.getElementById("result").innerHTML = "Score: 1.00 right"
+      else document.getElementById("result").innerHTML = "Score: " + scorestr(score) + " right"
+   }
+}
+</script>
+</head>
+<body>
+<span id="q0"></span></br>
+<input type="radio" name="q0" value="Agree" id="l0"></input> Agree</br>
+<input type="radio" name="q0" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q0" value="Disagree" id="r0"></input> Disagree</br>
+<span id="q1"></span></br>
+<input type="radio" name="q1" value="Agree" id="r1"></input> Agree</br>
+<input type="radio" name="q1" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q1" value="Disagree" id="l1"></input> Disagree</br>
+<span id="q2"></span></br>
+<input type="radio" name="q2" value="Agree" id="r2"></input> Agree</br>
+<input type="radio" name="q2" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q2" value="Disagree" id="l2"></input> Disagree</br>
+<span id="q3"></span></br>
+<input type="radio" name="q3" value="Agree" id="r3"></input> Agree</br>
+<input type="radio" name="q3" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q3" value="Disagree" id="l3"></input> Disagree</br>
+<span id="q4"></span></br>
+<input type="radio" name="q4" value="Agree" id="r4"></input> Agree</br>
+<input type="radio" name="q4" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q4" value="Disagree" id="l4"></input> Disagree</br>
+<span id="q5"></span></br>
+<input type="radio" name="q5" value="Agree" id="l5"></input> Agree</br>
+<input type="radio" name="q5" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q5" value="Disagree" id="r5"></input> Disagree</br>
+<span id="q6"></span></br>
+<input type="radio" name="q6" value="Agree" id="r6"></input> Agree</br>
+<input type="radio" name="q6" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q6" value="Disagree" id="l6"></input> Disagree</br>
+<span id="q7"></span></br>
+<input type="radio" name="q7" value="Agree" id="l7"></input> Agree</br>
+<input type="radio" name="q7" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q7" value="Disagree" id="r7"></input> Disagree</br>
+<span id="q8"></span></br>
+<input type="radio" name="q8" value="Agree" id="r8"></input> Agree</br>
+<input type="radio" name="q8" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q8" value="Disagree"  id="l8"></input> Disagree</br>
+<span id="q9"></span></br>
+<input type="radio" name="q9" value="Agree" id="r9"></input> Agree</br>
+<input type="radio" name="q9" value="Neutral"></input> Neutral</br>
+<input type="radio" name="q9" value="Disagree" id="l9"></input> Disagree</br>
+<input type="button" onclick="scoref()" value="Result"><span id="result"></span>
+<script>
+document.getElementById("q0").innerHTML = questions[0]
+document.getElementById("q1").innerHTML = questions[1]
+document.getElementById("q2").innerHTML = questions[2]
+document.getElementById("q3").innerHTML = questions[3]
+document.getElementById("q4").innerHTML = questions[4]
+document.getElementById("q5").innerHTML = questions[5]
+document.getElementById("q6").innerHTML = questions[6]
+document.getElementById("q7").innerHTML = questions[7]
+document.getElementById("q8").innerHTML = questions[8]
+document.getElementById("q9").innerHTML = questions[9]
+</script>
+</body>
+</html>
