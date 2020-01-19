@@ -1,0 +1,64 @@
+<html>
+<body onload="creatememe()">Victim: <input type="text" oninput="creatememe()" id="victim"></input> Looker: <input type="text" oninput="creatememe()" id="looker"></input> Width: <input type="text" oninput="creatememe()" id="width"value="750"></input></br><canvas id='resultpic' width='0' height='0'></canvas></br><a id="png" download>Download as PNG</a> <a id="svg" download>Download as SVG (unscaled)</a></body>
+<script>
+function creatememe() {
+var victim = document.getElementById("victim").value
+var abuser = document.getElementById("looker").value
+var svginput = `<?xml version="1.0" standalone="no"?>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="597pt" height="336pt" viewBox="0 0 597 336">
+<text x="10" y="50" font-size="20" font-family="sans-serif">${victim}</text>
+<text x="300" y="100" font-size="20" font-family="sans-serif">${abuser}</text>
+<g transform="translate(0.000000,336.000000) scale(0.100000,-0.100000)"
+stroke="none">
+<path d="M2221 3344 c-211 -57 -361 -252 -361 -469 0 -179 105 -351 262 -430
+38 -19 85 -37 104 -41 31 -6 35 -10 32 -32 -3 -25 -32 -39 -408 -199 -276
+-118 -412 -181 -427 -199 -33 -37 -31 -88 6 -125 19 -18 40 -29 58 -29 15 0
+195 72 398 159 l370 158 3 -370 c1 -260 -1 -374 -9 -383 -6 -7 -118 -102 -250
+-210 -260 -215 -273 -231 -246 -296 13 -30 35 -47 79 -62 17 -5 17 -8 -1 -53
+-10 -26 -69 -173 -130 -325 -61 -152 -111 -289 -111 -303 0 -40 50 -85 94 -85
+62 0 78 24 190 305 58 143 122 303 143 355 l39 95 156 3 c119 2 157 -1 161
+-10 61 -158 303 -738 314 -754 44 -67 149 -47 169 32 7 28 -3 54 -181 489
+-111 270 -107 241 -35 248 74 8 95 19 115 57 31 59 24 72 -161 296 l-134 163
+2 288 3 288 49 -75 c61 -95 92 -127 127 -135 60 -13 120 51 104 112 -3 16 -30
+64 -59 108 -29 44 -92 141 -139 216 l-87 135 0 67 c0 56 3 69 18 73 213 72
+352 256 352 469 0 315 -306 551 -609 469z m245 -191 c67 -23 154 -110 177
+-177 39 -114 14 -221 -72 -307 -66 -66 -124 -89 -221 -89 -165 0 -290 128
+-290 295 0 120 56 212 162 264 50 25 74 31 128 31 36 0 89 -8 116 -17z m-67
+-2053 l70 -85 -90 -3 c-49 -1 -130 -1 -180 0 l-92 3 104 87 c57 47 107 86 112
+85 4 -1 38 -40 76 -87z"/>
+<path d="M3725 2098 c-14 -13 -30 -41 -35 -63 -5 -22 -10 -243 -10 -491 0
+-381 -2 -453 -14 -464 -8 -6 -13 -17 -10 -25 13 -32 -17 -20 -67 28 -140 135
+-320 176 -498 114 -193 -68 -315 -228 -325 -429 -6 -140 48 -277 150 -375 99
+-96 215 -138 358 -130 191 10 345 121 425 304 22 50 26 74 28 178 1 66 2 126
+2 133 2 29 31 22 63 -13 46 -52 50 -60 39 -87 -6 -13 -30 -86 -54 -163 -172
+-541 -165 -509 -118 -556 37 -37 79 -38 120 -4 25 22 38 51 76 173 26 81 65
+205 89 277 l42 130 42 -3 c36 -3 46 1 72 26 40 41 39 77 -5 142 -40 60 -40 61
+-19 125 13 35 19 44 25 32 5 -8 69 -185 144 -393 146 -411 153 -424 221 -424
+44 0 94 45 94 85 0 21 -318 930 -377 1077 -42 104 -117 103 -244 -3 -26 -22
+-50 -39 -53 -39 -3 0 -6 165 -6 368 0 202 -5 385 -10 407 -11 48 -50 85 -90
+85 -16 0 -41 -10 -55 -22z m-413 -1052 c80 -14 167 -89 206 -176 20 -47 23
+-66 20 -130 -7 -126 -66 -212 -178 -263 -58 -26 -72 -29 -133 -24 -120 10
+-207 71 -257 180 -25 53 -28 72 -25 132 4 85 23 132 77 192 77 83 169 112 290
+89z"/>
+<path d="M3269 921 c-20 -20 -29 -39 -29 -61 0 -43 47 -90 90 -90 43 0 90 47
+90 90 0 22 -9 41 -29 61 -40 39 -82 39 -122 0z"/>
+<path d="M3029 751 c-20 -20 -29 -39 -29 -61 0 -43 47 -90 90 -90 43 0 90 47
+90 90 0 22 -9 41 -29 61 -40 39 -82 39 -122 0z"/>
+</g>
+</svg>`
+var scale = document.getElementById("width").value / 750
+document.getElementById("resultpic").width = 750*scale
+document.getElementById("resultpic").height = 447*scale
+var urlsrc = 'data:image/svg+xml,' + encodeURI(svginput)
+var resultp = document.getElementById("resultpic").getContext("2d")
+var img = new Image()
+img.src = urlsrc
+resultp.scale(scale, scale)
+img.onload = function() {
+resultp.drawImage(img, 0, 0)
+document.getElementById("png").href = document.getElementById("resultpic").toDataURL('image/png')
+document.getElementById("svg").href = urlsrc
+}
+}
+</script>
+</html>
