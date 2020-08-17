@@ -1,4 +1,4 @@
-<html><input type="text" onkeyup="tanex()" id="inint"></input> <a href="javascript:copyexpansion()">Copy to clipboard</a></br><u><span id="num"></span></u></br><span id="den"></span>
+<html><input type="text" onkeyup="tanex()" id="inint"></input> <a href="javascript:copyexpansion()">Copy to clipboard</a> <a href="javascript:downloadexpansion()" id="download">Download file</a></br><u><span id="num"></span></u></br><span id="den"></span>
 
 <script>
 function addx(num, den) {
@@ -63,6 +63,15 @@ function expand(arr) {
 function copyexpansion() {
    var out = "(" + document.getElementById('num').innerHTML + ")/(" + document.getElementById('den').innerHTML + ")"
    navigator.clipboard.writeText(out)
+}
+
+function downloadexpansion() {
+   var link = 'data:text/plain;charset=utf-8,' + encodeURIComponent("(" + document.getElementById('num').innerHTML + ")/(" + document.getElementById('den').innerHTML + ")")
+   document.getElementById('download').setAttribute("download", 'tan' + document.getElementById('inint').value + '.txt')
+   document.getElementById('download').setAttribute("href", link)
+   document.getElementById('download').click()
+   document.getElementById('download').removeAttribute("download")
+   document.getElementById('download').setAttribute("href", "javascript:downloadexpansion()")
 }
 
 function gettan(int) {
