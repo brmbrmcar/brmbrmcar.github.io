@@ -1,0 +1,85 @@
+<html><input type="text" onkeyup="tanex()" id="inint"></input> <a href="javascript:copyexpansion()">Copy to clipboard</a></br><u><span id="num"></span></u></br><span id="den"></span>
+
+<script>
+function addx(num, den) {
+   if (!den) {
+      den = num[1]
+      num = num[0]
+   }
+   var nlen = BigInt(num.length)
+   var dlen = BigInt(den.length)
+   var num1 = Array.from(num)
+   var i = 0n
+   while (i < dlen) {
+      if (!num1[i+1n]) num1[i+1n] = 0n
+      num1[i+1n] += den[i]
+      i += 1n
+   }
+   var den1 = Array.from(num)
+   den1.unshift(0n)
+   i = 0n
+   while (i < dlen) {
+      if (!den1[i]) den1[i] = 0n
+      den1[i] = den[i]-den1[i]
+      i += 1n
+   }
+   if (num1.length < den1.length) den1[den1.length-1] *= -1n
+   return([num1, den1])
+}
+
+function tanex(int) {
+   if (!int) int = document.getElementById('inint').value
+   int = BigInt(int)
+   if (!int) return
+   if (int < 0n) return
+   int -= 1n
+   var out = [[0n,1n],[1n]]
+   while (int) {
+      out = addx(out[0], out[1])
+      int -= 1n
+   }
+   document.getElementById('num').innerHTML = expand(out[0])
+   document.getElementById('den').innerHTML = expand(out[1])
+   return out
+}
+
+function expand(arr) {
+   var str = ""
+   var i = 0n
+   while (i < arr.length) {
+      if (arr[i]) {
+         var sign = arr[i] < 0 ? '' : '+'
+         var digit = arr[i] == 1 ? '' : arr[i]
+         if (digit == -1n) digit = '-'
+         if (!i) str += arr[i]
+         else if (i == 1n) str += digit + 'tan(x)'
+         else str += sign + digit + 'tan' + BigInt(i).toString().replace(/1/g,'¹').replace(/2/g,'²').replace(/3/g,'³').replace(/4/g,'⁴').replace(/5/g,'⁵').replace(/6/g,'⁶').replace(/7/g,'⁷').replace(/8/g,'⁸').replace(/9/g,'⁹').replace(/0/g,'⁰') + '(x)'
+      }
+      i += 1n
+   }
+   return str
+}
+
+function copyexpansion() {
+   var out = "(" + document.getElementById('num').innerHTML + ")/(" + document.getElementById('den').innerHTML + ")"
+   navigator.clipboard.writeText(out)
+}
+
+function gettan(int) {
+   var num = 0
+   var den = 0
+   var use = tanex(int)
+   var tan1 = Math.tan(1)
+   var i = 0
+   while (i < use[0].length) {
+      num += Number(use[0][i])*tan1**i
+      i += 1
+   }
+   i = 0
+   while (i < use[1].length) {
+      den += Number(use[1][i])*tan1**i
+      i += 1
+   }
+   return num/den
+}
+</script></html>
