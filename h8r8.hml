@@ -1,0 +1,13 @@
+<h1> Daisy enemy chart</h1>
+
+<h2> Are you... </h2>
+</br></br>A binary man? <input id="a1" type="checkbox"></input>
+</br></br>Cis? <input id="a2" type="checkbox"></input>
+</br></br>Stra-ig-ht? <input id="a3" type="checkbox"></input>
+</br></br>W-hite? <input id="a4" type="checkbox"></input>
+</br></br>Neurotypical? <input id="a5" type="checkbox"></input>
+</br></br>Able bodied? <input id="a6" type="checkbox"></input>
+</br></br>priv8 sc-hool cunt? <input id="a7" type="checkbox"></input>
+
+<a href="javascript:var i=0;var count=0;while(i<7){i+=1;if (document.getElementById('a'+i.toString()).checked) count+=1};document.getElementById('out').innerHTML='Your hate score: ' + count.toString()">Give me score cunt</a>
+</br></br><span id="out"></span>
