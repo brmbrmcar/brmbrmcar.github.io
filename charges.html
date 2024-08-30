@@ -167,11 +167,8 @@ function loadkey(n) {
    array = [[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n]]
    charges = []
    var tc = unpairn(n)
-   console.log(tc)
    for (c_ of tc) {
-      console.log(c_)
       c = unchargenum(c_)
-      console.log(c)
       charge(c[1], fromint(c[2]), c[0])
    }
 }
@@ -194,8 +191,6 @@ function shitunpair(z) {
       n += 1n
       m /= 2n
    }
-   console.log(n)
-   console.log(m)
    return [n,m/2n]
 }
 
