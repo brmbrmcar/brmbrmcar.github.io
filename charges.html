@@ -125,23 +125,26 @@ function pairn(xs) { // pair(xs.length-1,xs)+1
 
 function pairs(xs) {
    if (xs.length==1) return xs[0]
-   else return pair(xs[0],pairs(xs.slice(1)))
+   else return pair(pairs(xs.slice(0,Math.floor(xs.length/2))),pairs(xs.slice(Math.floor(xs.length/2))))
 }
 
 function unpairn(xs) {
    if (xs==0n) return []
    else {
       var [n, paired] = unpair(xs-1n)
-      var out = []
-      var t = 0
-      while (out.length<n) {
-         [t, paired] = unpair(paired)
-         out.push(t)
-      }
-      out.push(paired)
+      return unpairs(paired, n+1n)
    }
-   return out
 }
+
+function unpairs(xs,n) {
+   if (n==1n) return [xs]
+   else {
+      var [x1, x2] = unpair(xs)
+      return unpairs(x1, n/2n).concat(unpairs(x2, n-n/2n))
+   }
+}
+
+
 
 
 function genkey() {
