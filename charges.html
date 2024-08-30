@@ -120,7 +120,7 @@ function unchargenum(n_) {
 
 function pairn(xs) { // pair(xs.length-1,xs)+1
    if (xs.length==0n) return 0n
-   else return pair(BigInt(xs.length)-1n, pairs(xs))+1n
+   else return shitpair(BigInt(xs.length)-1n, pairs(xs))+1n
 }
 
 function pairs(xs) {
@@ -131,7 +131,7 @@ function pairs(xs) {
 function unpairn(xs) {
    if (xs==0n) return []
    else {
-      var [n, paired] = unpair(xs-1n)
+      var [n, paired] = shitunpair(xs-1n)
       return unpairs(paired, n+1n)
    }
 }
@@ -166,6 +166,28 @@ function loadkey(n) {
       c = unchargenum(c_)
       charge(c[1], fromint(c[2]), c[0])
    }
+}
+
+function shitpair(n_,m) { // m ++ 0 ++ 1^n
+   var n = n_
+   var out = 2n*m
+   while (n>0n) {
+      out *= 2n
+      out += 1n
+      n -= 1n
+   }
+   return out
+}
+
+function shitunpair(z) {
+   var n = 0n
+   var m = z
+   while (m%2n==1n) {
+      n += 1n
+      m /= 2n
+   }
+   
+   return [n,m/2n]
 }
 
 
