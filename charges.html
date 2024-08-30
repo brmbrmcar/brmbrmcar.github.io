@@ -1,0 +1,191 @@
+<html><head>
+<script>
+var array = [[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n]]
+var names = ["Daisy","George","James","Leo"]
+
+var charges = []
+
+function topounds(n_) {
+   n = BigInt(n_)
+   pennies = n%100n
+   if (pennies<10n) return "£" + (n/100n) + ".0" + pennies
+   else return "£" + (n/100n) + "." + pennies
+} 
+
+function toint(js) { // array of indexed names to bigint
+   let out = 0n
+   for (i=0; i<js.length; i++) {
+      out += 2n**BigInt(js[i])
+   }
+   return out
+}
+
+function fromint(n) { // returns array of indexed names
+   let l = names.length
+   let out = []
+   for (i=0; i<l; i++) {
+      if (2n**BigInt(i) & n) out.push(i.toString())
+   }
+   return out
+}
+
+function ltostring(js) { // list of names to string
+   if (js.length == 0) return ""
+   else if (js.length == 1) return names[js[0]]
+   else if (js.length == 2) return names[js[0]] + " and " + names[js[1]]
+   else return names[js[0]] + ", " + ltostring(js.slice(1))
+}
+
+function printout() { // prints who owes who
+   var out = ""
+   for (i=0; i<names.length; i++) {
+      for (j=0; j<i; j++) {
+         if (array[i][j]>0n) out += names[j] + " owes " + names[i] + " " + topounds(array[i][j]) + "</br>"
+         if (array[i][j]<0n) out += names[i] + " owes " + names[j] + " " + topounds(-array[i][j]) + "</br>"
+      }
+   }
+   return out
+}
+
+function charge(i, js, amount, uncharge=false) {
+   if (js.length==0) {
+      window.alert("error: cannot divide by 0 cunts")
+      return
+   }
+   let n = BigInt(amount)/BigInt(js.length)
+   if (n<=0 && !uncharge) {
+      window.alert("error: non-positive charged will fuck this machine up, if you fucked up a previous expense delete it and redo it")
+      return
+   }
+   document.getElementById("genkey").innerHTML = ""
+   for (j of js) { // don't have to cast because lol
+      if (i==j) continue
+      else if (i>j)  array[i][j] += n
+      else array[j][i] -= n
+   }
+   document.getElementById("data").innerHTML = printout()
+   if (!uncharge) {
+      charges.push([amount, i, toint(js)])
+      document.getElementById("logs").innerHTML = "<div id='log" + (charges.length-1) + "'>" + names[i] + " spent " + topounds(amount) + " benefiting " + ltostring(js) + ". <a href='javascript:uncharge(" + (charges.length-1) + ")'>Delete</a> </div>" + document.getElementById("logs").innerHTML
+   }
+}
+
+function uncharge(i) { // sets charge record to 0, will be ignored when generating export key
+   document.getElementById("log" + i).innerHTML = ""
+   charge(charges[i][1], fromint(charges[i][2]), -charges[i][0], true)
+   charges[i][0] = 0n
+}
+
+
+
+function sqrt(n, seed = 1n) {
+   if (n==0n) return 0n
+   var x = (seed + n/seed)/2n
+   if (x==seed || x==seed+1n) {
+      return seed
+   }
+   else return sqrt(n,x)
+}
+
+function pair(x,y) { // (x,y) => (x+y)(x+y+1)/2+y
+   let m = (x+y)
+   return (m+1n)*m/2n+y
+}
+
+function unpair(z) { // (x+y)(x+y+1)/2n+y => (x,y)
+   let m = (sqrt(8n*z+1n)-1n)/2n
+   let t = (m*m+m)/2n
+   let y = z-t
+   let x = m-y
+   
+   return [x,y]
+}
+
+function chargenum(amount, i, js) { //(amount-1)*15*4+(beneficiaries-1)*4+charger
+   var out = amount-1n
+   out = out*15n+js-1n
+   out = out*4n+i
+   return out
+}
+
+function unchargenum(n_) {
+   var n = n_
+   var i = n%4n
+   n /= 4n
+   var js = n%15n+1n
+   n /= 15n
+   var amount = n+1n
+   return [amount, i, js]
+}
+
+function pairn(xs) { // pair(xs.length-1,xs)+1
+   if (xs.length==0n) return 0n
+   else return pair(BigInt(xs.length)-1n, pairs(xs))+1n
+}
+
+function pairs(xs) {
+   if (xs.length==1) return xs[0]
+   else return pair(xs[0],pairs(xs.slice(1)))
+}
+
+function unpairn(xs) {
+   if (xs==0n) return []
+   else {
+      var [n, paired] = unpair(xs-1n)
+      var out = []
+      var t = 0
+      while (out.length<n) {
+         [t, paired] = unpair(paired)
+         out.push(t)
+      }
+      out.push(paired)
+   }
+   return out
+}
+
+
+function genkey() {
+   var outs = []
+   for (c of charges) {
+      if (c[0] == 0n) continue
+      outs.push(chargenum(c[0],c[1],c[2]))
+   }
+   document.getElementById("genkey").innerHTML = "Key: " + pairn(outs)
+}
+
+function loadkey(n) {
+   document.getElementById("data").innerHTML = ""
+   document.getElementById("logs").innerHTML = ""
+   array = [[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n]]
+   charges = []
+   var tc = unpairn(n)
+   for (c_ of tc) {
+      c = unchargenum(c_)
+      charge(c[1], fromint(c[2]), c[0])
+   }
+}
+
+
+</script>
+</head>
+
+<body>
+
+
+<input type="text" id="keyin"></input> <a href="javascript:loadkey(BigInt(document.getElementById('keyin').value))">Import key</a>.
+
+I am <select id="namepayer"><option value="0">Daisy</option><option value="1">George</option><option value="2">James</option><option value="3">Leo</option><select> and I spent <input type="text" id="amount"></input>p, benefiting <input type="checkbox" id="0"></input><label for="0">Daisy</label><input type="checkbox" id="1"></input><label for="0">George</label><input type="checkbox" id="2"></input><label for="0">James</label><input type="checkbox" id="3"></input><label for="3">Leo</label>. <a href="javascript: var bens=[]; for (i=0; i<4; i++) if (document.getElementById(i).checked) bens.push(i); charge(BigInt(document.getElementById('namepayer').value), bens, BigInt(document.getElementById('amount').value))">Add expense</a>. <a href="javascript:genkey()">Export key</a> <div id="genkey"></div>
+
+</br>
+</br>
+WARNING: this tool does NOT divide pence.
+</br>
+</br>
+<div id="data"></div>
+</br>
+</br>
+Transactions:
+</br>
+<div id="logs"></div>
+</body>
+</html>
