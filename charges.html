@@ -4,6 +4,7 @@ var array = [[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n]
 var names = ["Daisy","George","James","Leo"]
 
 var charges = []
+var warned = false
 
 function topounds(n_) {
    n = BigInt(n_)
@@ -53,9 +54,13 @@ function charge(i, js, amount, uncharge=false) {
       return
    }
    let n = BigInt(amount)/BigInt(js.length)
-   if (n<=0 && !uncharge) {
+   if (BigInt(amount)<=0 && !uncharge) {
       window.alert("error: non-positive charged will fuck this machine up, if you fucked up a previous expense delete it and redo it")
       return
+   }
+   if (n<=0 && !uncharge && !warned) {
+       window.alert("warning: as number of beneficiaries exceeds number of pennies, no adjustment to dues can be made for this transaction. this action is allowed for logging purposes only and to maintain bijectivity of keys. this wanrning shall not be displayed again")
+       warned = true
    }
    document.getElementById("genkey").innerHTML = ""
    for (j of js) { // don't have to cast because lol
@@ -162,8 +167,11 @@ function loadkey(n) {
    array = [[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n],[0n, 0n, 0n, 0n]]
    charges = []
    var tc = unpairn(n)
+   console.log(tc)
    for (c_ of tc) {
+      console.log(c_)
       c = unchargenum(c_)
+      console.log(c)
       charge(c[1], fromint(c[2]), c[0])
    }
 }
@@ -186,7 +194,8 @@ function shitunpair(z) {
       n += 1n
       m /= 2n
    }
-   
+   console.log(n)
+   console.log(m)
    return [n,m/2n]
 }
 
